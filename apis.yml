@@ -1,0 +1,19 @@
+aid: duck-creek
+url: https://raw.githubusercontent.com/api-evangelist/duck-creek/refs/heads/main/apis.yml
+apis:
+- aid: duck-creek:duck-creek-api
+  name: Duck Creek Insurance Platform API
+  tags:
+  - Insurance
+  - Policy
+  - Billing
+  - Claims
+  - SaaS
+  image: https://raw.githubusercontent.com/api-evangelist/duck-creek/refs/heads/main/image.png
+  humanURL: https://www.duckcreek.com/
+  baseURL: https://api.duckcreek.example.com
+  properties:
+  - url: https://www.duckcreek.com/
+    type: Documentation
+  description: >-
+    Duck Creek Technologies provides SaaS insurance platform APIs for policy administration, billing, and claims management. APIs enable product configuration, premium calculation, policy lifecycle management, and billing operations for P&C and specialty insurance carriers.
