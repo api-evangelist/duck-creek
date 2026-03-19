@@ -1,0 +1,110 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "dc": "https://api.duckcreek.com/v1/schemas/",
+    "schema": "https://schema.org/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Policy": {
+      "@id": "dc:Policy",
+      "@type": "schema:InsurancePolicy"
+    },
+    "Claim": {
+      "@id": "dc:Claim",
+      "@type": "schema:Claim"
+    },
+    "BillingAccount": {
+      "@id": "dc:BillingAccount",
+      "@type": "schema:Invoice"
+    },
+    "Insured": {
+      "@id": "dc:Insured",
+      "@type": "schema:Person"
+    },
+    "Coverage": {
+      "@id": "dc:Coverage"
+    },
+
+    "policyId": "@id",
+    "policyNumber": {
+      "@id": "schema:identifier"
+    },
+    "status": {
+      "@id": "schema:eventStatus"
+    },
+    "productCode": {
+      "@id": "schema:productID"
+    },
+    "lineOfBusiness": {
+      "@id": "schema:category"
+    },
+    "effectiveDate": {
+      "@id": "schema:validFrom",
+      "@type": "xsd:date"
+    },
+    "expirationDate": {
+      "@id": "schema:validThrough",
+      "@type": "xsd:date"
+    },
+    "insured": {
+      "@id": "schema:insuredParty"
+    },
+    "coverages": {
+      "@id": "dc:hasCoverage",
+      "@container": "@set"
+    },
+    "totalPremium": {
+      "@id": "schema:price",
+      "@type": "xsd:decimal"
+    },
+    "writingCompany": {
+      "@id": "schema:provider",
+      "@type": "schema:Organization"
+    },
+    "agentCode": {
+      "@id": "schema:agent"
+    },
+    "name": "schema:name",
+    "dateOfBirth": {
+      "@id": "schema:birthDate",
+      "@type": "xsd:date"
+    },
+    "address": {
+      "@id": "schema:address",
+      "@type": "schema:PostalAddress"
+    },
+    "phone": "schema:telephone",
+    "email": "schema:email",
+    "lossDate": {
+      "@id": "schema:startDate",
+      "@type": "xsd:date"
+    },
+    "claimNumber": {
+      "@id": "schema:identifier"
+    },
+    "coverageCode": {
+      "@id": "schema:productID"
+    },
+    "limit": {
+      "@id": "schema:maxValue",
+      "@type": "xsd:decimal"
+    },
+    "deductible": {
+      "@id": "dc:deductibleAmount",
+      "@type": "xsd:decimal"
+    },
+    "premium": {
+      "@id": "schema:price",
+      "@type": "xsd:decimal"
+    },
+    "createdAt": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "updatedAt": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    }
+  }
+}

@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.duckcreek.com/v1/schemas/policy",
+  "title": "Duck Creek Insurance Policy",
+  "description": "Schema representing a P&C insurance policy managed in Duck Creek Policy Administration.",
+  "type": "object",
+  "required": ["policyId", "policyNumber", "status", "productCode", "insured", "effectiveDate"],
+  "properties": {
+    "policyId": {
+      "type": "string",
+      "description": "Internal Duck Creek policy identifier",
+      "format": "uuid"
+    },
+    "policyNumber": {
+      "type": "string",
+      "description": "Human-readable policy number",
+      "examples": ["PA-2026-001234", "HO-2026-567890"]
+    },
+    "status": {
+      "type": "string",
+      "description": "Current policy lifecycle status",
+      "enum": ["QUOTED", "IN_FORCE", "CANCELLED", "EXPIRED", "PENDING_CANCEL", "RENEWAL", "RESCINDED"]
+    },
+    "productCode": {
+      "type": "string",
+      "description": "Duck Creek product code identifying the insurance product"
+    },
+    "lineOfBusiness": {
+      "type": "string",
+      "description": "Insurance line of business",
+      "enum": ["AUTO", "HOME", "COMMERCIAL_PROPERTY", "GENERAL_LIABILITY", "WORKERS_COMP", "UMBRELLA", "SPECIALTY"]
+    },
+    "effectiveDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Policy effective date"
+    },
+    "expirationDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Policy expiration date"
+    },
+    "insured": {
+      "$ref": "#/$defs/Insured"
+    },
+    "coverages": {
+      "type": "array",
+      "description": "List of coverages included in the policy",
+      "items": {
+        "$ref": "#/$defs/Coverage"
+      }
+    },
+    "totalPremium": {
+      "type": "number",
+      "format": "double",
+      "description": "Total annualized premium in USD",
+      "minimum": 0
+    },
+    "writingCompany": {
+      "type": "string",
+      "description": "Insurance company writing the policy"
+    },
+    "agentCode": {
+      "type": "string",
+      "description": "Producing agent code"
+    },
+    "billingAccountId": {
+      "type": "string",
+      "description": "Associated billing account identifier"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "$defs": {
+    "Insured": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Full name of the insured"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["INDIVIDUAL", "BUSINESS"]
+        },
+        "dateOfBirth": {
+          "type": "string",
+          "format": "date",
+          "description": "Insured date of birth (for individual policyholders)"
+        },
+        "address": {
+          "$ref": "#/$defs/Address"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        }
+      }
+    },
+    "Coverage": {
+      "type": "object",
+      "required": ["coverageCode"],
+      "properties": {
+        "coverageCode": {
+          "type": "string",
+          "description": "Duck Creek coverage type code",
+          "examples": ["BI", "PD", "COMP", "COLL", "DWELLING", "LIABILITY"]
+        },
+        "coverageName": {
+          "type": "string",
+          "description": "Human-readable coverage name"
+        },
+        "limit": {
+          "type": "number",
+          "format": "double",
+          "description": "Coverage limit in USD",
+          "minimum": 0
+        },
+        "deductible": {
+          "type": "number",
+          "format": "double",
+          "description": "Coverage deductible in USD",
+          "minimum": 0
+        },
+        "premium": {
+          "type": "number",
+          "format": "double",
+          "description": "Coverage premium contribution in USD",
+          "minimum": 0
+        },
+        "subLimits": {
+          "type": "array",
+          "description": "Sub-limits within this coverage",
+          "items": {
+            "type": "object",
+            "properties": {
+              "subLimitCode": { "type": "string" },
+              "amount": { "type": "number" }
+            }
+          }
+        }
+      }
+    },
+    "Address": {
+      "type": "object",
+      "properties": {
+        "street1": { "type": "string" },
+        "street2": { "type": "string" },
+        "city": { "type": "string" },
+        "state": {
+          "type": "string",
+          "pattern": "^[A-Z]{2}$",
+          "description": "US state code"
+        },
+        "zipCode": {
+          "type": "string",
+          "pattern": "^[0-9]{5}(-[0-9]{4})?$"
+        },
+        "country": {
+          "type": "string",
+          "default": "US"
+        }
+      }
+    }
+  }
+}

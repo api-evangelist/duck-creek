@@ -22,6 +22,8 @@ apis:
     type: Reference
   - url: https://www.duckcreek.com/content-exchange/anywhere_api_extension_sdk/
     type: SDKs
+  - url: https://raw.githubusercontent.com/api-evangelist/duck-creek/refs/heads/main/openapi/duck-creek-policy-openapi.yml
+    type: OpenAPI
   description: >-
     Duck Creek Anywhere provides a RESTful API enabling non-Duck Creek systems to query product definitions, configurations, and content to drive processing within third-party systems. The platform exposes 2,600+ APIs across all Duck Creek applications using open standards. The Anywhere API Extension SDK allows developers to create custom REST API extensions to the Duck Creek Anywhere REST infrastructure.
 - aid: duck-creek:duck-creek-policy-api
@@ -90,6 +92,12 @@ apis:
 common:
 - url: https://www.duckcreek.com/
   type: Website
+- url: https://raw.githubusercontent.com/api-evangelist/duck-creek/refs/heads/main/openapi/duck-creek-policy-openapi.yml
+  type: OpenAPI
+- url: https://raw.githubusercontent.com/api-evangelist/duck-creek/refs/heads/main/json-schema/duck-creek-policy-schema.json
+  type: JSONSchema
+- url: https://raw.githubusercontent.com/api-evangelist/duck-creek/refs/heads/main/json-ld/duck-creek-context.jsonld
+  type: JSONLDContext
 - url: http://duckcreek.dev/
   type: Portal
 - url: https://www.duckcreek.com/product/duck-creek-platform/
