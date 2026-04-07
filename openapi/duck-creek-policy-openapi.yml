@@ -19,18 +19,16 @@ servers:
 security:
   - oauth2: []
 tags:
-  - name: Policies
-    description: Insurance policy lifecycle management
-  - name: Quotes
-    description: Policy quoting and rating
-  - name: Claims
-    description: Claims intake and management
   - name: Billing
     description: Billing account and invoice management
-  - name: Payments
-    description: Premium payment processing
+  - name: Claims
+    description: Claims intake and management
+  - name: Policies
+    description: Insurance policy lifecycle management
   - name: Products
     description: Insurance product definitions and configuration
+  - name: Quotes
+    description: Policy quoting and rating
 paths:
   /policies:
     get:
