@@ -1,10 +1,12 @@
-# Unknown (duck-creek)
+# Duck Creek Technologies (duck-creek)
+
+Duck Creek Technologies is a leading SaaS provider of insurance core platform software for property and casualty (P&C) and general insurance carriers. This repository captures the APIs, developer tools, and machine-readable API artifacts for Duck Creek Technologies.
 
 **URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/duck-creek/refs/heads/main/apis.yml)
 
 ## Timestamps
 
-- **Modified:** 2026-03-18 
+- **Modified:** 2026-04-28
 
 ## APIs
 
@@ -13,10 +15,9 @@ Duck Creek Anywhere provides a RESTful API enabling non-Duck Creek systems to qu
 
 **Human URL:** [https://www.duckcreek.com/product/anywhere-integration/](https://www.duckcreek.com/product/anywhere-integration/)
 
-
 #### Tags:
 
- - Insurance, Policy, Billing, Claims, REST, SaaS
+ - Billing, Claims, Insurance, Policy, REST, SaaS
 
 #### Properties
 
@@ -31,10 +32,9 @@ Duck Creek Policy Administration API enables product configuration, premium calc
 
 **Human URL:** [https://www.duckcreek.com/product/policy-management-software/](https://www.duckcreek.com/product/policy-management-software/)
 
-
 #### Tags:
 
- - Insurance, Policy, P&C Insurance, Product Configuration, Premium Calculation
+ - Insurance, P&C Insurance, Policy, Premium Calculation, Product Configuration
 
 #### Properties
 
@@ -45,10 +45,9 @@ Duck Creek Billing API provides billing operations for insurance carriers includ
 
 **Human URL:** [https://www.duckcreek.com/product/duck-creek-platform/](https://www.duckcreek.com/product/duck-creek-platform/)
 
-
 #### Tags:
 
- - Insurance, Billing, Payments, P&C Insurance
+ - Billing, Insurance, P&C Insurance, Payments
 
 #### Properties
 
@@ -59,10 +58,9 @@ Duck Creek Claims API supports claims intake, adjudication workflow, reserve man
 
 **Human URL:** [https://www.duckcreek.com/product/duck-creek-platform/](https://www.duckcreek.com/product/duck-creek-platform/)
 
-
 #### Tags:
 
- - Insurance, Claims, P&C Insurance, Claims Management
+ - Claims, Claims Management, Insurance, P&C Insurance
 
 #### Properties
 
@@ -73,10 +71,9 @@ Duck Creek Payments Orchestrator API enables insurance carriers to orchestrate p
 
 **Human URL:** [https://developers.imbursepayments.com/](https://developers.imbursepayments.com/)
 
-
 #### Tags:
 
- - Insurance, Payments, Payment Processing, P&C Insurance
+ - Insurance, P&C Insurance, Payment Processing, Payments
 
 #### Properties
 
@@ -100,5 +97,7 @@ Duck Creek Payments Orchestrator API enables insurance carriers to orchestrate p
 - [Support](https://www.duckcreek.com/product/support/)
 
 ## Maintainers
+
+**FN:** Kin Lane
 
 **Email:** kin@apievangelist.com
