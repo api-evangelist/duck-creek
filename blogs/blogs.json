@@ -1,0 +1,13 @@
+{
+  "repo": "duck-creek",
+  "feeds": [
+    {
+      "source": "https://www.duckcreek.com/content-exchange/",
+      "feed_url": "https://www.duckcreek.com/feed/",
+      "saved": 10,
+      "title": "Duck Creek"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:27:12Z"
+}
