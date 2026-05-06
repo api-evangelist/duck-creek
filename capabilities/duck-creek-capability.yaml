@@ -1,0 +1,649 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Duck Creek Policy Administration API
+  description: Duck Creek Policy Administration API enables product configuration, premium calculation, policy lifecycle management,
+    and policy issuance for P&C and specialty insurance carriers. Duck Creek Anywhere provides 2,600+ RESTful APIs across
+    all Duck Creek applications using open standards. Supports end-to-end policy management from quoting through renewal.
+  tags:
+  - Duck
+  - Creek
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: duck-creek
+    baseUri: https://api.duckcreek.com/v1
+    description: Duck Creek Policy Administration API HTTP API.
+    authentication:
+      type: bearer
+      token: '{{DUCK_CREEK_TOKEN}}'
+    resources:
+    - name: policies
+      path: /policies
+      operations:
+      - name: listpolicies
+        method: GET
+        description: List insurance policies
+        inputParameters:
+        - name: status
+          in: query
+          type: string
+          description: Filter by policy status
+        - name: productCode
+          in: query
+          type: string
+          description: Filter by insurance product code
+        - name: effectiveAfter
+          in: query
+          type: string
+          description: Filter policies effective on or after this date (ISO 8601)
+        - name: effectiveBefore
+          in: query
+          type: string
+          description: Filter policies effective on or before this date
+        - name: insuredName
+          in: query
+          type: string
+          description: Filter by insured name (partial match)
+        - name: limit
+          in: query
+          type: integer
+        - name: offset
+          in: query
+          type: integer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createpolicy
+        method: POST
+        description: Create a new policy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: policies-policyid
+      path: /policies/{policyId}
+      operations:
+      - name: getpolicy
+        method: GET
+        description: Get policy details
+        inputParameters:
+        - name: policyId
+          in: path
+          type: string
+          required: true
+          description: Unique policy identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatepolicy
+        method: PUT
+        description: Update policy (endorsement)
+        inputParameters:
+        - name: policyId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: policies-policyid-cancel
+      path: /policies/{policyId}/cancel
+      operations:
+      - name: cancelpolicy
+        method: POST
+        description: Cancel a policy
+        inputParameters:
+        - name: policyId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: policies-policyid-renew
+      path: /policies/{policyId}/renew
+      operations:
+      - name: renewpolicy
+        method: POST
+        description: Renew a policy
+        inputParameters:
+        - name: policyId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: quotes
+      path: /quotes
+      operations:
+      - name: createquote
+        method: POST
+        description: Create a policy quote
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: claims
+      path: /claims
+      operations:
+      - name: listclaims
+        method: GET
+        description: List claims
+        inputParameters:
+        - name: policyId
+          in: query
+          type: string
+          description: Filter claims for a specific policy
+        - name: claimStatus
+          in: query
+          type: string
+        - name: lossDateAfter
+          in: query
+          type: string
+        - name: limit
+          in: query
+          type: integer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createclaim
+        method: POST
+        description: Report a new claim
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: claims-claimid
+      path: /claims/{claimId}
+      operations:
+      - name: getclaim
+        method: GET
+        description: Get claim details
+        inputParameters:
+        - name: claimId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: billing-accounts
+      path: /billing/accounts
+      operations:
+      - name: listbillingaccounts
+        method: GET
+        description: List billing accounts
+        inputParameters:
+        - name: policyId
+          in: query
+          type: string
+        - name: limit
+          in: query
+          type: integer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: billing-accounts-accountid-invoices
+      path: /billing/accounts/{accountId}/invoices
+      operations:
+      - name: listinvoices
+        method: GET
+        description: List invoices for a billing account
+        inputParameters:
+        - name: accountId
+          in: path
+          type: string
+          required: true
+        - name: status
+          in: query
+          type: string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: products
+      path: /products
+      operations:
+      - name: listproducts
+        method: GET
+        description: List insurance products
+        inputParameters:
+        - name: lineOfBusiness
+          in: query
+          type: string
+          description: Filter by line of business
+        - name: state
+          in: query
+          type: string
+          description: Filter products available in a specific US state (2-letter code)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: duck-creek-rest
+    description: REST adapter for Duck Creek Policy Administration API.
+    resources:
+    - path: /policies
+      name: listpolicies
+      operations:
+      - method: GET
+        name: listpolicies
+        description: List insurance policies
+        call: duck-creek.listpolicies
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /policies
+      name: createpolicy
+      operations:
+      - method: POST
+        name: createpolicy
+        description: Create a new policy
+        call: duck-creek.createpolicy
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /policies/{policyId}
+      name: getpolicy
+      operations:
+      - method: GET
+        name: getpolicy
+        description: Get policy details
+        call: duck-creek.getpolicy
+        with:
+          policyId: rest.policyId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /policies/{policyId}
+      name: updatepolicy
+      operations:
+      - method: PUT
+        name: updatepolicy
+        description: Update policy (endorsement)
+        call: duck-creek.updatepolicy
+        with:
+          policyId: rest.policyId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /policies/{policyId}/cancel
+      name: cancelpolicy
+      operations:
+      - method: POST
+        name: cancelpolicy
+        description: Cancel a policy
+        call: duck-creek.cancelpolicy
+        with:
+          policyId: rest.policyId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /policies/{policyId}/renew
+      name: renewpolicy
+      operations:
+      - method: POST
+        name: renewpolicy
+        description: Renew a policy
+        call: duck-creek.renewpolicy
+        with:
+          policyId: rest.policyId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /quotes
+      name: createquote
+      operations:
+      - method: POST
+        name: createquote
+        description: Create a policy quote
+        call: duck-creek.createquote
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /claims
+      name: listclaims
+      operations:
+      - method: GET
+        name: listclaims
+        description: List claims
+        call: duck-creek.listclaims
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /claims
+      name: createclaim
+      operations:
+      - method: POST
+        name: createclaim
+        description: Report a new claim
+        call: duck-creek.createclaim
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /claims/{claimId}
+      name: getclaim
+      operations:
+      - method: GET
+        name: getclaim
+        description: Get claim details
+        call: duck-creek.getclaim
+        with:
+          claimId: rest.claimId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /billing/accounts
+      name: listbillingaccounts
+      operations:
+      - method: GET
+        name: listbillingaccounts
+        description: List billing accounts
+        call: duck-creek.listbillingaccounts
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /billing/accounts/{accountId}/invoices
+      name: listinvoices
+      operations:
+      - method: GET
+        name: listinvoices
+        description: List invoices for a billing account
+        call: duck-creek.listinvoices
+        with:
+          accountId: rest.accountId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /products
+      name: listproducts
+      operations:
+      - method: GET
+        name: listproducts
+        description: List insurance products
+        call: duck-creek.listproducts
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: duck-creek-mcp
+    transport: http
+    description: MCP adapter for Duck Creek Policy Administration API for AI agent use.
+    tools:
+    - name: listpolicies
+      description: List insurance policies
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: duck-creek.listpolicies
+      with:
+        status: tools.status
+        productCode: tools.productCode
+        effectiveAfter: tools.effectiveAfter
+        effectiveBefore: tools.effectiveBefore
+        insuredName: tools.insuredName
+        limit: tools.limit
+        offset: tools.offset
+      inputParameters:
+      - name: status
+        type: string
+        description: Filter by policy status
+      - name: productCode
+        type: string
+        description: Filter by insurance product code
+      - name: effectiveAfter
+        type: string
+        description: Filter policies effective on or after this date (ISO 8601)
+      - name: effectiveBefore
+        type: string
+        description: Filter policies effective on or before this date
+      - name: insuredName
+        type: string
+        description: Filter by insured name (partial match)
+      - name: limit
+        type: integer
+        description: limit
+      - name: offset
+        type: integer
+        description: offset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createpolicy
+      description: Create a new policy
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: duck-creek.createpolicy
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getpolicy
+      description: Get policy details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: duck-creek.getpolicy
+      with:
+        policyId: tools.policyId
+      inputParameters:
+      - name: policyId
+        type: string
+        description: Unique policy identifier
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updatepolicy
+      description: Update policy (endorsement)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: duck-creek.updatepolicy
+      with:
+        policyId: tools.policyId
+      inputParameters:
+      - name: policyId
+        type: string
+        description: policyId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cancelpolicy
+      description: Cancel a policy
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: duck-creek.cancelpolicy
+      with:
+        policyId: tools.policyId
+      inputParameters:
+      - name: policyId
+        type: string
+        description: policyId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: renewpolicy
+      description: Renew a policy
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: duck-creek.renewpolicy
+      with:
+        policyId: tools.policyId
+      inputParameters:
+      - name: policyId
+        type: string
+        description: policyId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createquote
+      description: Create a policy quote
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: duck-creek.createquote
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listclaims
+      description: List claims
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: duck-creek.listclaims
+      with:
+        policyId: tools.policyId
+        claimStatus: tools.claimStatus
+        lossDateAfter: tools.lossDateAfter
+        limit: tools.limit
+      inputParameters:
+      - name: policyId
+        type: string
+        description: Filter claims for a specific policy
+      - name: claimStatus
+        type: string
+        description: claimStatus
+      - name: lossDateAfter
+        type: string
+        description: lossDateAfter
+      - name: limit
+        type: integer
+        description: limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createclaim
+      description: Report a new claim
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: duck-creek.createclaim
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getclaim
+      description: Get claim details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: duck-creek.getclaim
+      with:
+        claimId: tools.claimId
+      inputParameters:
+      - name: claimId
+        type: string
+        description: claimId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listbillingaccounts
+      description: List billing accounts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: duck-creek.listbillingaccounts
+      with:
+        policyId: tools.policyId
+        limit: tools.limit
+      inputParameters:
+      - name: policyId
+        type: string
+        description: policyId
+      - name: limit
+        type: integer
+        description: limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listinvoices
+      description: List invoices for a billing account
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: duck-creek.listinvoices
+      with:
+        accountId: tools.accountId
+        status: tools.status
+      inputParameters:
+      - name: accountId
+        type: string
+        description: accountId
+        required: true
+      - name: status
+        type: string
+        description: status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listproducts
+      description: List insurance products
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: duck-creek.listproducts
+      with:
+        lineOfBusiness: tools.lineOfBusiness
+        state: tools.state
+      inputParameters:
+      - name: lineOfBusiness
+        type: string
+        description: Filter by line of business
+      - name: state
+        type: string
+        description: Filter products available in a specific US state (2-letter code)
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    DUCK_CREEK_TOKEN: DUCK_CREEK_TOKEN
