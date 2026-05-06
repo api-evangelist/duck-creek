@@ -1,167 +1,81 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
   dataSpec: FOCUS
   dataSpecVersion: '1.3'
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
-provider: duck-creek
+provider: Duck Creek
 providerId: duck-creek
-publisherName: duck-creek
-serviceCategory: API
+publisherName: Duck Creek Technologies, Inc.
+serviceCategory: Insurance Core SaaS
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
+  - Insurance
+  - Policy
+  - Claims
+  - Billing
+  - SaaS
   - FinOps
-  - Cost Management
   - FOCUS
-description: FinOps framework definition for the duck-creek API surface. Provides a FOCUS-aligned mapping
-  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+description: FOCUS-aligned FinOps shape for Duck Creek. Billing is enterprise SaaS contract per carrier
+  tenant; per-API-call pricing is not surfaced, though carriers often see Anywhere call volumes feed internal
+  capacity planning.
+notes: No public per-call meter; reconciled=false.
+sources:
+  - https://www.duckcreek.com/duck-creek-anywhere/
+  - https://www.duckcreek.com/product/duck-creek-platform/
 billingModel:
-  pricingCategory: Usage-Based
-  billingFrequency: Monthly
+  pricingCategory: Enterprise SaaS
+  billingFrequency: Per-Invoice
   billingCurrency: USD
   chargeCategories:
-    - Usage
     - Purchase
     - Tax
-    - Credit
-    - Adjustment
-  chargeFrequency: Recurring
 focusColumns:
-  ServiceName: duck-creek
-  ServiceCategory: Developer Tools / API
-  ProviderName: duck-creek
-  PublisherName: duck-creek
-  InvoiceIssuerName: duck-creek
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  ServiceName: Duck Creek Suite
+  ServiceCategory: Insurance Core SaaS
+  ProviderName: Duck Creek Technologies
+  PublisherName: Duck Creek Technologies, Inc.
+  InvoiceIssuerName: Duck Creek Technologies, Inc.
   BillingCurrency: USD
-  ChargeCategory: Usage
+  ChargeCategory: Purchase
 meters:
-  - name: api_requests
-    description: Count of billable API requests
+  - name: tenant_subscription
+    description: Active Duck Creek Suite tenants
+    unit: tenant
+    aggregation: count
+    dimensions:
+      - product
+  - name: policies_in_force
+    description: Policies under management (typical contractual sizing dimension)
+    unit: policy
+    aggregation: count
+    dimensions:
+      - line_of_business
+  - name: anywhere_api_calls
+    description: Internal observability of calls against Duck Creek Anywhere
     unit: request
     aggregation: sum
     dimensions:
       - api
-      - endpoint
-      - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
-    aggregation: sum
-    dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: Duck Creek Anywhere REST API
-    baseURL: https://api.duckcreek.com
-    tags:
-      - Billing
-      - Claims
-      - Insurance
-      - Policy
-      - REST
-      - SaaS
-    serviceName: Duck Creek Anywhere REST API
-    serviceCategory: API
-  - name: Duck Creek Policy Administration API
-    baseURL: https://api.duckcreek.com
-    tags:
-      - Insurance
-      - P&C Insurance
-      - Policy
-      - Premium Calculation
-      - Product Configuration
-    serviceName: Duck Creek Policy Administration API
-    serviceCategory: API
-  - name: Duck Creek Billing API
-    baseURL: https://api.duckcreek.com
-    tags:
-      - Billing
-      - Insurance
-      - P&C Insurance
-      - Payments
-    serviceName: Duck Creek Billing API
-    serviceCategory: API
-  - name: Duck Creek Claims API
-    baseURL: https://api.duckcreek.com
-    tags:
-      - Claims
-      - Claims Management
-      - Insurance
-      - P&C Insurance
-    serviceName: Duck Creek Claims API
-    serviceCategory: API
-  - name: Duck Creek Payments Orchestrator API
-    baseURL: https://api.imbursepayments.com
-    tags:
-      - Insurance
-      - P&C Insurance
-      - Payment Processing
-      - Payments
-    serviceName: Duck Creek Payments Orchestrator API
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+      - line_of_business
+principles:
+  - name: Visibility
+    description: Reconcile the Duck Creek Suite invoice against contracted policies-in-force, products,
+      and tenant scope; track Anywhere call volumes for internal capacity planning.
+  - name: Allocation
+    description: Allocate Duck Creek cost across personal vs. commercial lines and individual products
+      (Policy, Billing, Claims).
+  - name: Optimization
+    description: Use Anywhere Managed Integrations rather than rebuilding third-party connectors; cache
+      reference data; consolidate Anywhere call patterns to stay within tenant capacity.
+  - name: Accountability
+    description: Carrier IT / digital owner is accountable for Duck Creek spend and contract renewal terms.
 maintainers:
-  - name: Kin Lane
+  - FN: Kin Lane
     email: kin@apievangelist.com
