@@ -1,0 +1,129 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Duck Creek Policy Administration API — Billing
+  description: 'Duck Creek Policy Administration API — Billing. 2 operations. Lead operation: List billing accounts. Self-contained
+    Naftiko capability covering one Duck Creek business surface.'
+  tags:
+  - Duck Creek
+  - Billing
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    DUCK_CREEK_API_KEY: DUCK_CREEK_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: policy-billing
+    baseUri: https://api.duckcreek.com/v1
+    description: Duck Creek Policy Administration API — Billing business capability. Self-contained, no shared references.
+    resources:
+    - name: billing-accounts
+      path: /billing/accounts
+      operations:
+      - name: listbillingaccounts
+        method: GET
+        description: List billing accounts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: policyId
+          in: query
+          type: string
+        - name: limit
+          in: query
+          type: integer
+    - name: billing-accounts-accountId-invoices
+      path: /billing/accounts/{accountId}/invoices
+      operations:
+      - name: listinvoices
+        method: GET
+        description: List invoices for a billing account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: accountId
+          in: path
+          type: string
+          required: true
+        - name: status
+          in: query
+          type: string
+    authentication:
+      type: bearer
+      token: '{{env.DUCK_CREEK_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: policy-billing-rest
+    port: 8080
+    description: REST adapter for Duck Creek Policy Administration API — Billing. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/billing/accounts
+      name: billing-accounts
+      description: REST surface for billing-accounts.
+      operations:
+      - method: GET
+        name: listbillingaccounts
+        description: List billing accounts
+        call: policy-billing.listbillingaccounts
+        with:
+          policyId: rest.policyId
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/billing/accounts/{accountid}/invoices
+      name: billing-accounts-accountid-invoices
+      description: REST surface for billing-accounts-accountId-invoices.
+      operations:
+      - method: GET
+        name: listinvoices
+        description: List invoices for a billing account
+        call: policy-billing.listinvoices
+        with:
+          accountId: rest.accountId
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: policy-billing-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Duck Creek Policy Administration API — Billing. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-billing-accounts
+      description: List billing accounts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: policy-billing.listbillingaccounts
+      with:
+        policyId: tools.policyId
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-invoices-billing-account
+      description: List invoices for a billing account
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: policy-billing.listinvoices
+      with:
+        accountId: tools.accountId
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Duck Creek Policy Administration API — Quotes
+  description: 'Duck Creek Policy Administration API — Quotes. 1 operations. Lead operation: Create a policy quote. Self-contained
+    Naftiko capability covering one Duck Creek business surface.'
+  tags:
+  - Duck Creek
+  - Quotes
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    DUCK_CREEK_API_KEY: DUCK_CREEK_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: policy-quotes
+    baseUri: https://api.duckcreek.com/v1
+    description: Duck Creek Policy Administration API — Quotes business capability. Self-contained, no shared references.
+    resources:
+    - name: quotes
+      path: /quotes
+      operations:
+      - name: createquote
+        method: POST
+        description: Create a policy quote
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.DUCK_CREEK_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: policy-quotes-rest
+    port: 8080
+    description: REST adapter for Duck Creek Policy Administration API — Quotes. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/quotes
+      name: quotes
+      description: REST surface for quotes.
+      operations:
+      - method: POST
+        name: createquote
+        description: Create a policy quote
+        call: policy-quotes.createquote
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: policy-quotes-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Duck Creek Policy Administration API — Quotes. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: create-policy-quote
+      description: Create a policy quote
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: policy-quotes.createquote
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
