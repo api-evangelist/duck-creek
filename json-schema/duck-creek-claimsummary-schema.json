@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ClaimSummary",
+  "title": "ClaimSummary",
+  "type": "object",
+  "properties": {
+    "claimId": {
+      "type": "string"
+    },
+    "claimNumber": {
+      "type": "string"
+    },
+    "policyId": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "OPEN",
+        "CLOSED",
+        "DENIED",
+        "PENDING"
+      ]
+    },
+    "lossDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "reportedDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "lossType": {
+      "type": "string"
+    },
+    "totalIncurred": {
+      "type": "number"
+    }
+  }
+}

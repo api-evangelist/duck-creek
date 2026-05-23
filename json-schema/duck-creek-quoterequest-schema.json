@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/QuoteRequest",
+  "title": "QuoteRequest",
+  "type": "object",
+  "required": [
+    "productCode",
+    "insured",
+    "effectiveDate"
+  ],
+  "properties": {
+    "productCode": {
+      "type": "string"
+    },
+    "insured": {
+      "$ref": "#/components/schemas/Insured"
+    },
+    "effectiveDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "expirationDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "coverages": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/CoverageRequest"
+      }
+    },
+    "agentCode": {
+      "type": "string"
+    }
+  }
+}

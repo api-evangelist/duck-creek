@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Insured",
+  "title": "Insured",
+  "type": "object",
+  "required": [
+    "name"
+  ],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "INDIVIDUAL",
+        "BUSINESS"
+      ]
+    },
+    "dateOfBirth": {
+      "type": "string",
+      "format": "date"
+    },
+    "ssn": {
+      "type": "string",
+      "description": "Social security number (masked)"
+    },
+    "address": {
+      "$ref": "#/components/schemas/Address"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    }
+  }
+}

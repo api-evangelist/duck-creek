@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PolicySummary",
+  "title": "PolicySummary",
+  "type": "object",
+  "properties": {
+    "policyId": {
+      "type": "string"
+    },
+    "policyNumber": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "QUOTED",
+        "IN_FORCE",
+        "CANCELLED",
+        "EXPIRED",
+        "PENDING_CANCEL",
+        "RENEWAL"
+      ]
+    },
+    "productCode": {
+      "type": "string"
+    },
+    "lineOfBusiness": {
+      "type": "string"
+    },
+    "effectiveDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "expirationDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "insuredName": {
+      "type": "string"
+    },
+    "totalPremium": {
+      "type": "number",
+      "format": "double"
+    }
+  }
+}

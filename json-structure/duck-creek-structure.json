@@ -1,0 +1,293 @@
+{
+  "provider": "Duck-Creek",
+  "providerId": "duck-creek",
+  "kind": "json-structure",
+  "description": "Structural overview of the Duck-Creek API surface; extracted from openapi/.",
+  "schemaCount": 24,
+  "operationCount": 13,
+  "schemas": [
+    {
+      "name": "PolicyList",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "PolicySummary",
+      "type": "object",
+      "propertyCount": 9,
+      "required": []
+    },
+    {
+      "name": "Policy",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "PolicyRequest",
+      "type": "object",
+      "propertyCount": 7,
+      "required": [
+        "productCode",
+        "insured",
+        "effectiveDate"
+      ]
+    },
+    {
+      "name": "PolicyUpdateRequest",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "CancellationRequest",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "cancellationReason",
+        "effectiveDate"
+      ]
+    },
+    {
+      "name": "QuoteRequest",
+      "type": "object",
+      "propertyCount": 6,
+      "required": [
+        "productCode",
+        "insured",
+        "effectiveDate"
+      ]
+    },
+    {
+      "name": "Quote",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "Insured",
+      "type": "object",
+      "propertyCount": 7,
+      "required": [
+        "name"
+      ]
+    },
+    {
+      "name": "Coverage",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "CoverageRequest",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "coverageCode"
+      ]
+    },
+    {
+      "name": "Endorsement",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "ClaimList",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "ClaimSummary",
+      "type": "object",
+      "propertyCount": 8,
+      "required": []
+    },
+    {
+      "name": "Claim",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "ClaimRequest",
+      "type": "object",
+      "propertyCount": 5,
+      "required": [
+        "policyId",
+        "lossDate",
+        "lossType",
+        "description"
+      ]
+    },
+    {
+      "name": "BillingAccountList",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "BillingAccount",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "InvoiceList",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "Invoice",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "ProductList",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "ProductSummary",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "Address",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "Error",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/policies",
+      "operationId": "listPolicies",
+      "summary": "List insurance policies",
+      "tags": [
+        "Policies"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/policies",
+      "operationId": "createPolicy",
+      "summary": "Create a new policy",
+      "tags": [
+        "Policies"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/policies/{policyId}",
+      "operationId": "getPolicy",
+      "summary": "Get policy details",
+      "tags": [
+        "Policies"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/policies/{policyId}",
+      "operationId": "updatePolicy",
+      "summary": "Update policy (endorsement)",
+      "tags": [
+        "Policies"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/policies/{policyId}/cancel",
+      "operationId": "cancelPolicy",
+      "summary": "Cancel a policy",
+      "tags": [
+        "Policies"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/policies/{policyId}/renew",
+      "operationId": "renewPolicy",
+      "summary": "Renew a policy",
+      "tags": [
+        "Policies"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/quotes",
+      "operationId": "createQuote",
+      "summary": "Create a policy quote",
+      "tags": [
+        "Quotes"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/claims",
+      "operationId": "listClaims",
+      "summary": "List claims",
+      "tags": [
+        "Claims"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/claims",
+      "operationId": "createClaim",
+      "summary": "Report a new claim",
+      "tags": [
+        "Claims"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/claims/{claimId}",
+      "operationId": "getClaim",
+      "summary": "Get claim details",
+      "tags": [
+        "Claims"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/billing/accounts",
+      "operationId": "listBillingAccounts",
+      "summary": "List billing accounts",
+      "tags": [
+        "Billing"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/billing/accounts/{accountId}/invoices",
+      "operationId": "listInvoices",
+      "summary": "List invoices for a billing account",
+      "tags": [
+        "Billing"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/products",
+      "operationId": "listProducts",
+      "summary": "List insurance products",
+      "tags": [
+        "Products"
+      ]
+    }
+  ]
+}

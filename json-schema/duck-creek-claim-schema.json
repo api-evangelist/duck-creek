@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Claim",
+  "title": "Claim",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/ClaimSummary"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "claimant": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "phone": {
+              "type": "string"
+            }
+          }
+        },
+        "adjuster": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            }
+          }
+        },
+        "reserves": {
+          "type": "object",
+          "properties": {
+            "indemnity": {
+              "type": "number"
+            },
+            "expenses": {
+              "type": "number"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

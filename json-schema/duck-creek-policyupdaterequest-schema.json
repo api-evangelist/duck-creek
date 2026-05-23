@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PolicyUpdateRequest",
+  "title": "PolicyUpdateRequest",
+  "type": "object",
+  "properties": {
+    "endorsementEffectiveDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "coverages": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/CoverageRequest"
+      }
+    }
+  }
+}

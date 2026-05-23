@@ -1,0 +1,15 @@
+name: Duck-Creek Domain Vocabulary
+provider: Duck-Creek
+providerId: duck-creek
+description: Tag-derived vocabulary for the Duck-Creek API surface; sourced from openapi/ tags.
+terms:
+- term: Billing
+  description: Billing account and invoice management
+- term: Claims
+  description: Claims intake and management
+- term: Policies
+  description: Insurance policy lifecycle management
+- term: Products
+  description: Insurance product definitions and configuration
+- term: Quotes
+  description: Policy quoting and rating

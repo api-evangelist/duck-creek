@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ClaimRequest",
+  "title": "ClaimRequest",
+  "type": "object",
+  "required": [
+    "policyId",
+    "lossDate",
+    "lossType",
+    "description"
+  ],
+  "properties": {
+    "policyId": {
+      "type": "string"
+    },
+    "lossDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "lossType": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "claimant": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

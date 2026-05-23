@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Quote",
+  "title": "Quote",
+  "type": "object",
+  "properties": {
+    "quoteId": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "RATED",
+        "REFERRED",
+        "DECLINED"
+      ]
+    },
+    "totalPremium": {
+      "type": "number"
+    },
+    "premiumBreakdown": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "coverageCode": {
+            "type": "string"
+          },
+          "premium": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "underwritingMessages": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "expiresAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}
