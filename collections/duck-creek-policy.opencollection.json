@@ -1,0 +1,367 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Duck Creek Policy Administration API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://api.duckcreek.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Policies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List insurance policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.duckcreek.com/v1/policies",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by policy status"
+              },
+              {
+                "name": "productCode",
+                "value": "",
+                "type": "query",
+                "description": "Filter by insurance product code"
+              },
+              {
+                "name": "effectiveAfter",
+                "value": "",
+                "type": "query",
+                "description": "Filter policies effective on or after this date (ISO 8601)"
+              },
+              {
+                "name": "effectiveBefore",
+                "value": "",
+                "type": "query",
+                "description": "Filter policies effective on or before this date"
+              },
+              {
+                "name": "insuredName",
+                "value": "",
+                "type": "query",
+                "description": "Filter by insured name (partial match)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of insurance policies. Supports filtering by policy status, product type, effective date range, and insured name."
+        },
+        {
+          "info": {
+            "name": "Create a new policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.duckcreek.com/v1/policies",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Issues a new insurance policy. The policy must first be quoted and underwriting requirements must be satisfied before issuance."
+        },
+        {
+          "info": {
+            "name": "Get policy details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.duckcreek.com/v1/policies/:policyId",
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique policy identifier"
+              }
+            ]
+          },
+          "docs": "Returns full details for a specific insurance policy."
+        },
+        {
+          "info": {
+            "name": "Update policy (endorsement)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.duckcreek.com/v1/policies/:policyId",
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies an in-force policy through an endorsement transaction."
+        },
+        {
+          "info": {
+            "name": "Cancel a policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.duckcreek.com/v1/policies/:policyId/cancel",
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancels an in-force insurance policy with a specified reason and effective date."
+        },
+        {
+          "info": {
+            "name": "Renew a policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.duckcreek.com/v1/policies/:policyId/renew",
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates the renewal process for an expiring policy."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Quotes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a policy quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.duckcreek.com/v1/quotes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates an insurance quote with premium calculation for the specified risk. Returns full premium breakdown and underwriting messages."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Claims",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List claims",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.duckcreek.com/v1/claims",
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "query",
+                "description": "Filter claims for a specific policy"
+              },
+              {
+                "name": "claimStatus",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "lossDateAfter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of claims for accessible policies."
+        },
+        {
+          "info": {
+            "name": "Report a new claim",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.duckcreek.com/v1/claims",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new first notice of loss (FNOL) for an existing policy."
+        },
+        {
+          "info": {
+            "name": "Get claim details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.duckcreek.com/v1/claims/:claimId",
+            "params": [
+              {
+                "name": "claimId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns full details for a specific insurance claim."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Billing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List billing accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.duckcreek.com/v1/billing/accounts",
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns billing accounts associated with insurance policies."
+        },
+        {
+          "info": {
+            "name": "List invoices for a billing account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.duckcreek.com/v1/billing/accounts/:accountId/invoices",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns invoices (installment bills) for a billing account."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List insurance products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.duckcreek.com/v1/products",
+            "params": [
+              {
+                "name": "lineOfBusiness",
+                "value": "",
+                "type": "query",
+                "description": "Filter by line of business"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Filter products available in a specific US state (2-letter code)"
+              }
+            ]
+          },
+          "docs": "Returns available insurance product definitions and configurations."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
