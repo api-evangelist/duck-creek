@@ -101,6 +101,12 @@ apis:
     Provides reference documentation and how-to guides via the dedicated payments
     developer portal at developers.imbursepayments.com.
 common:
+- type: TrustCenter
+  url: security/duck-creek-trust-center.yml
+- type: DomainSecurity
+  url: security/duck-creek-domain-security.yml
+- type: Authentication
+  url: authentication/duck-creek-authentication.yml
 - type: OAuthScopes
   url: scopes/duck-creek-scopes.yml
 - type: LinkedIn
