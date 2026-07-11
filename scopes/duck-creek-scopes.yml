@@ -1,0 +1,41 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/duck-creek-policy-openapi.yml
+schemes:
+- name: oauth2
+  source: openapi/duck-creek-policy-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://api.duckcreek.com/oauth/token
+  description: OAuth 2.0 for Duck Creek Anywhere API authentication
+scopes:
+- scope: billing:read
+  description: Read billing data
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/duck-creek-policy-openapi.yml
+- scope: claims:read
+  description: Read claim data
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/duck-creek-policy-openapi.yml
+- scope: claims:write
+  description: Create and update claims
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/duck-creek-policy-openapi.yml
+- scope: policies:read
+  description: Read policy data
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/duck-creek-policy-openapi.yml
+- scope: policies:write
+  description: Create and modify policies
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/duck-creek-policy-openapi.yml

@@ -101,6 +101,8 @@ apis:
     Provides reference documentation and how-to guides via the dedicated payments
     developer portal at developers.imbursepayments.com.
 common:
+- type: OAuthScopes
+  url: scopes/duck-creek-scopes.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/duck-creek-technologies
 - url: https://www.duckcreek.com/
