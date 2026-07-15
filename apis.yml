@@ -101,6 +101,8 @@ apis:
     Provides reference documentation and how-to guides via the dedicated payments
     developer portal at developers.imbursepayments.com.
 common:
+- type: AgenticAccess
+  url: agentic-access/duck-creek-agentic-access.yml
 - type: TrustCenter
   url: security/duck-creek-trust-center.yml
 - type: DomainSecurity
