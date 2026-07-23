@@ -1,0 +1,148 @@
+openapi: 3.1.0
+info:
+  title: Duck Creek Policy Administration Billing API
+  description: Duck Creek Policy Administration API enables product configuration, premium calculation, policy lifecycle management, and policy issuance for P&C and specialty insurance carriers. Duck Creek Anywhere provides 2,600+ RESTful APIs across all Duck Creek applications using open standards. Supports end-to-end policy management from quoting through renewal.
+  version: 1.0.0
+  contact:
+    name: Duck Creek Support
+    url: https://www.duckcreek.com/customer-support/
+  license:
+    name: Duck Creek Terms of Use
+    url: https://www.duckcreek.com/duck-creek-terms-use/
+servers:
+- url: https://api.duckcreek.com/v1
+  description: Duck Creek API Production
+security:
+- oauth2: []
+tags:
+- name: Billing
+  description: Billing account and invoice management
+paths:
+  /billing/accounts:
+    get:
+      operationId: listBillingAccounts
+      summary: List billing accounts
+      description: Returns billing accounts associated with insurance policies.
+      tags:
+      - Billing
+      parameters:
+      - name: policyId
+        in: query
+        schema:
+          type: string
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 50
+      responses:
+        '200':
+          description: List of billing accounts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingAccountList'
+  /billing/accounts/{accountId}/invoices:
+    get:
+      operationId: listInvoices
+      summary: List invoices for a billing account
+      description: Returns invoices (installment bills) for a billing account.
+      tags:
+      - Billing
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - DUE
+          - PAID
+          - OVERDUE
+          - VOID
+      responses:
+        '200':
+          description: List of invoices
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceList'
+components:
+  schemas:
+    BillingAccount:
+      type: object
+      properties:
+        accountId:
+          type: string
+        policyId:
+          type: string
+        policyNumber:
+          type: string
+        balance:
+          type: number
+        nextDueDate:
+          type: string
+          format: date
+        nextDueAmount:
+          type: number
+        paymentPlan:
+          type: string
+          enum:
+          - FULL_PAY
+          - SEMI_ANNUAL
+          - QUARTERLY
+          - MONTHLY
+          - DIRECT_BILL
+    InvoiceList:
+      type: object
+      properties:
+        invoices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Invoice'
+    Invoice:
+      type: object
+      properties:
+        invoiceId:
+          type: string
+        accountId:
+          type: string
+        invoiceDate:
+          type: string
+          format: date
+        dueDate:
+          type: string
+          format: date
+        amount:
+          type: number
+        status:
+          type: string
+          enum:
+          - DUE
+          - PAID
+          - OVERDUE
+          - VOID
+    BillingAccountList:
+      type: object
+      properties:
+        accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillingAccount'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 for Duck Creek Anywhere API authentication
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.duckcreek.com/oauth/token
+          scopes:
+            policies:read: Read policy data
+            policies:write: Create and modify policies
+            claims:read: Read claim data
+            claims:write: Create and update claims
+            billing:read: Read billing data

@@ -1,0 +1,91 @@
+openapi: 3.1.0
+info:
+  title: Duck Creek Policy Administration Billing Products API
+  description: Duck Creek Policy Administration API enables product configuration, premium calculation, policy lifecycle management, and policy issuance for P&C and specialty insurance carriers. Duck Creek Anywhere provides 2,600+ RESTful APIs across all Duck Creek applications using open standards. Supports end-to-end policy management from quoting through renewal.
+  version: 1.0.0
+  contact:
+    name: Duck Creek Support
+    url: https://www.duckcreek.com/customer-support/
+  license:
+    name: Duck Creek Terms of Use
+    url: https://www.duckcreek.com/duck-creek-terms-use/
+servers:
+- url: https://api.duckcreek.com/v1
+  description: Duck Creek API Production
+security:
+- oauth2: []
+tags:
+- name: Products
+  description: Insurance product definitions and configuration
+paths:
+  /products:
+    get:
+      operationId: listProducts
+      summary: List insurance products
+      description: Returns available insurance product definitions and configurations.
+      tags:
+      - Products
+      parameters:
+      - name: lineOfBusiness
+        in: query
+        description: Filter by line of business
+        schema:
+          type: string
+          enum:
+          - AUTO
+          - HOME
+          - COMMERCIAL_PROPERTY
+          - GENERAL_LIABILITY
+          - WORKERS_COMP
+          - UMBRELLA
+      - name: state
+        in: query
+        description: Filter products available in a specific US state (2-letter code)
+        schema:
+          type: string
+          pattern: ^[A-Z]{2}$
+      responses:
+        '200':
+          description: List of insurance products
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductList'
+components:
+  schemas:
+    ProductSummary:
+      type: object
+      properties:
+        productCode:
+          type: string
+        productName:
+          type: string
+        lineOfBusiness:
+          type: string
+        availableStates:
+          type: array
+          items:
+            type: string
+        effectiveDate:
+          type: string
+          format: date
+    ProductList:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductSummary'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 for Duck Creek Anywhere API authentication
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.duckcreek.com/oauth/token
+          scopes:
+            policies:read: Read policy data
+            policies:write: Create and modify policies
+            claims:read: Read claim data
+            claims:write: Create and update claims
+            billing:read: Read billing data

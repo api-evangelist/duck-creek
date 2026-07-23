@@ -1,0 +1,200 @@
+openapi: 3.1.0
+info:
+  title: Duck Creek Policy Administration Billing Claims API
+  description: Duck Creek Policy Administration API enables product configuration, premium calculation, policy lifecycle management, and policy issuance for P&C and specialty insurance carriers. Duck Creek Anywhere provides 2,600+ RESTful APIs across all Duck Creek applications using open standards. Supports end-to-end policy management from quoting through renewal.
+  version: 1.0.0
+  contact:
+    name: Duck Creek Support
+    url: https://www.duckcreek.com/customer-support/
+  license:
+    name: Duck Creek Terms of Use
+    url: https://www.duckcreek.com/duck-creek-terms-use/
+servers:
+- url: https://api.duckcreek.com/v1
+  description: Duck Creek API Production
+security:
+- oauth2: []
+tags:
+- name: Claims
+  description: Claims intake and management
+paths:
+  /claims:
+    get:
+      operationId: listClaims
+      summary: List claims
+      description: Returns a list of claims for accessible policies.
+      tags:
+      - Claims
+      parameters:
+      - name: policyId
+        in: query
+        description: Filter claims for a specific policy
+        schema:
+          type: string
+      - name: claimStatus
+        in: query
+        schema:
+          type: string
+          enum:
+          - OPEN
+          - CLOSED
+          - DENIED
+          - PENDING
+      - name: lossDateAfter
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 50
+      responses:
+        '200':
+          description: List of claims
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClaimList'
+    post:
+      operationId: createClaim
+      summary: Report a new claim
+      description: Creates a new first notice of loss (FNOL) for an existing policy.
+      tags:
+      - Claims
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClaimRequest'
+      responses:
+        '201':
+          description: Claim created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Claim'
+  /claims/{claimId}:
+    get:
+      operationId: getClaim
+      summary: Get claim details
+      description: Returns full details for a specific insurance claim.
+      tags:
+      - Claims
+      parameters:
+      - name: claimId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Claim details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Claim'
+components:
+  schemas:
+    Claim:
+      allOf:
+      - $ref: '#/components/schemas/ClaimSummary'
+      - type: object
+        properties:
+          description:
+            type: string
+          claimant:
+            type: object
+            properties:
+              name:
+                type: string
+              phone:
+                type: string
+          adjuster:
+            type: object
+            properties:
+              name:
+                type: string
+              email:
+                type: string
+          reserves:
+            type: object
+            properties:
+              indemnity:
+                type: number
+              expenses:
+                type: number
+    ClaimSummary:
+      type: object
+      properties:
+        claimId:
+          type: string
+        claimNumber:
+          type: string
+        policyId:
+          type: string
+        status:
+          type: string
+          enum:
+          - OPEN
+          - CLOSED
+          - DENIED
+          - PENDING
+        lossDate:
+          type: string
+          format: date
+        reportedDate:
+          type: string
+          format: date
+        lossType:
+          type: string
+        totalIncurred:
+          type: number
+    ClaimRequest:
+      type: object
+      required:
+      - policyId
+      - lossDate
+      - lossType
+      - description
+      properties:
+        policyId:
+          type: string
+        lossDate:
+          type: string
+          format: date
+        lossType:
+          type: string
+        description:
+          type: string
+        claimant:
+          type: object
+          properties:
+            name:
+              type: string
+            phone:
+              type: string
+    ClaimList:
+      type: object
+      properties:
+        total:
+          type: integer
+        claims:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClaimSummary'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 for Duck Creek Anywhere API authentication
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.duckcreek.com/oauth/token
+          scopes:
+            policies:read: Read policy data
+            policies:write: Create and modify policies
+            claims:read: Read claim data
+            claims:write: Create and update claims
+            billing:read: Read billing data

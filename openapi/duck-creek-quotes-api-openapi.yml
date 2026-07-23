@@ -1,0 +1,180 @@
+openapi: 3.1.0
+info:
+  title: Duck Creek Policy Administration Billing Quotes API
+  description: Duck Creek Policy Administration API enables product configuration, premium calculation, policy lifecycle management, and policy issuance for P&C and specialty insurance carriers. Duck Creek Anywhere provides 2,600+ RESTful APIs across all Duck Creek applications using open standards. Supports end-to-end policy management from quoting through renewal.
+  version: 1.0.0
+  contact:
+    name: Duck Creek Support
+    url: https://www.duckcreek.com/customer-support/
+  license:
+    name: Duck Creek Terms of Use
+    url: https://www.duckcreek.com/duck-creek-terms-use/
+servers:
+- url: https://api.duckcreek.com/v1
+  description: Duck Creek API Production
+security:
+- oauth2: []
+tags:
+- name: Quotes
+  description: Policy quoting and rating
+paths:
+  /quotes:
+    post:
+      operationId: createQuote
+      summary: Create a policy quote
+      description: Generates an insurance quote with premium calculation for the specified risk. Returns full premium breakdown and underwriting messages.
+      tags:
+      - Quotes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuoteRequest'
+      responses:
+        '200':
+          description: Quote generated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quote'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+components:
+  schemas:
+    QuoteRequest:
+      type: object
+      required:
+      - productCode
+      - insured
+      - effectiveDate
+      properties:
+        productCode:
+          type: string
+        insured:
+          $ref: '#/components/schemas/Insured'
+        effectiveDate:
+          type: string
+          format: date
+        expirationDate:
+          type: string
+          format: date
+        coverages:
+          type: array
+          items:
+            $ref: '#/components/schemas/CoverageRequest'
+        agentCode:
+          type: string
+    CoverageRequest:
+      type: object
+      required:
+      - coverageCode
+      properties:
+        coverageCode:
+          type: string
+        limit:
+          type: number
+        deductible:
+          type: number
+    Insured:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+          - INDIVIDUAL
+          - BUSINESS
+        dateOfBirth:
+          type: string
+          format: date
+        ssn:
+          type: string
+          description: Social security number (masked)
+        address:
+          $ref: '#/components/schemas/Address'
+        phone:
+          type: string
+        email:
+          type: string
+          format: email
+    Address:
+      type: object
+      properties:
+        street1:
+          type: string
+        street2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+          pattern: ^[A-Z]{2}$
+        zipCode:
+          type: string
+        country:
+          type: string
+          default: US
+    Quote:
+      type: object
+      properties:
+        quoteId:
+          type: string
+        status:
+          type: string
+          enum:
+          - RATED
+          - REFERRED
+          - DECLINED
+        totalPremium:
+          type: number
+        premiumBreakdown:
+          type: array
+          items:
+            type: object
+            properties:
+              coverageCode:
+                type: string
+              premium:
+                type: number
+        underwritingMessages:
+          type: array
+          items:
+            type: string
+        expiresAt:
+          type: string
+          format: date-time
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            type: string
+  responses:
+    BadRequest:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 for Duck Creek Anywhere API authentication
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.duckcreek.com/oauth/token
+          scopes:
+            policies:read: Read policy data
+            policies:write: Create and modify policies
+            claims:read: Read claim data
+            claims:write: Create and update claims
+            billing:read: Read billing data
