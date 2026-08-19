@@ -1,0 +1,199 @@
+{
+  "item": [
+    {
+      "id": "99b63377-9f27-4090-8895-61155854dbb3",
+      "name": "Quotes",
+      "description": {
+        "content": "Policy quoting and rating",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "98da4916-fdbb-499a-928f-79505fe80ed5",
+          "name": "Create a policy quote",
+          "request": {
+            "name": "Create a policy quote",
+            "description": {
+              "content": "Generates an insurance quote with premium calculation for the specified risk. Returns full premium breakdown and underwriting messages.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "quotes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"productCode\": \"<string>\",\n  \"insured\": {\n    \"name\": \"<string>\",\n    \"type\": \"<string>\",\n    \"dateOfBirth\": \"<date>\",\n    \"ssn\": \"<string>\",\n    \"address\": {\n      \"street1\": \"<string>\",\n      \"street2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"country\": \"US\"\n    },\n    \"phone\": \"<string>\",\n    \"email\": \"<email>\"\n  },\n  \"effectiveDate\": \"<date>\",\n  \"expirationDate\": \"<date>\",\n  \"coverages\": [\n    {\n      \"coverageCode\": \"<string>\",\n      \"limit\": \"<number>\",\n      \"deductible\": \"<number>\"\n    },\n    {\n      \"coverageCode\": \"<string>\",\n      \"limit\": \"<number>\",\n      \"deductible\": \"<number>\"\n    }\n  ],\n  \"agentCode\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bf520834-9843-495d-ae3e-57deb830b76f",
+              "name": "Quote generated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"productCode\": \"<string>\",\n  \"insured\": {\n    \"name\": \"string\",\n    \"type\": \"INDIVIDUAL\",\n    \"dateOfBirth\": \"1962-01-28\",\n    \"ssn\": \"string\",\n    \"address\": {\n      \"street1\": \"string\",\n      \"street2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"NQ\",\n      \"zipCode\": \"string\",\n      \"country\": \"US\"\n    },\n    \"phone\": \"string\",\n    \"email\": \"6j76@azDqjw.yi\"\n  },\n  \"effectiveDate\": \"<date>\",\n  \"expirationDate\": \"<date>\",\n  \"coverages\": [\n    {\n      \"coverageCode\": \"string\",\n      \"limit\": 5095.67021706392,\n      \"deductible\": 3511.391997967239\n    },\n    {\n      \"coverageCode\": \"string\",\n      \"limit\": 1653.2203167659443,\n      \"deductible\": 9151.783717864515\n    }\n  ],\n  \"agentCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"quoteId\": \"string\",\n  \"status\": \"DECLINED\",\n  \"totalPremium\": 434.7018475134556,\n  \"premiumBreakdown\": [\n    {\n      \"coverageCode\": \"string\",\n      \"premium\": 8186.162967828057\n    },\n    {\n      \"coverageCode\": \"string\",\n      \"premium\": 9926.064465205784\n    }\n  ],\n  \"underwritingMessages\": [\n    \"string\",\n    \"string\"\n  ],\n  \"expiresAt\": \"2025-09-02T04:29:39.568Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee324d10-62d7-4260-a0fa-a1e80054c2ec",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"productCode\": \"<string>\",\n  \"insured\": {\n    \"name\": \"string\",\n    \"type\": \"INDIVIDUAL\",\n    \"dateOfBirth\": \"1962-01-28\",\n    \"ssn\": \"string\",\n    \"address\": {\n      \"street1\": \"string\",\n      \"street2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"NQ\",\n      \"zipCode\": \"string\",\n      \"country\": \"US\"\n    },\n    \"phone\": \"string\",\n    \"email\": \"6j76@azDqjw.yi\"\n  },\n  \"effectiveDate\": \"<date>\",\n  \"expirationDate\": \"<date>\",\n  \"coverages\": [\n    {\n      \"coverageCode\": \"string\",\n      \"limit\": 5095.67021706392,\n      \"deductible\": 3511.391997967239\n    },\n    {\n      \"coverageCode\": \"string\",\n      \"limit\": 1653.2203167659443,\n      \"deductible\": 9151.783717864515\n    }\n  ],\n  \"agentCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.duckcreek.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "policies:read policies:write claims:read claims:write billing:read"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://api.duckcreek.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6a4fcca3-5028-4fc7-8ebf-09382578746a",
+    "name": "Duck Creek Policy Administration Billing Quotes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Duck Creek Policy Administration API enables product configuration, premium calculation, policy lifecycle management, and policy issuance for P&C and specialty insurance carriers. Duck Creek Anywhere provides 2,600+ RESTful APIs across all Duck Creek applications using open standards. Supports end-to-end policy management from quoting through renewal.\n\nContact Support:\n Name: Duck Creek Support",
+      "type": "text/plain"
+    }
+  }
+}

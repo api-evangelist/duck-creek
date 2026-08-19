@@ -1,0 +1,149 @@
+{
+  "item": [
+    {
+      "id": "fe7668bb-74f8-444d-8ef5-d63f4364a8fe",
+      "name": "Products",
+      "description": {
+        "content": "Insurance product definitions and configuration",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "867ff174-6fd0-4381-9a87-d9fa152cd8ad",
+          "name": "List insurance products",
+          "request": {
+            "name": "List insurance products",
+            "description": {
+              "content": "Returns available insurance product definitions and configurations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lineOfBusiness",
+                  "value": "<string>",
+                  "description": "Filter by line of business"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Filter products available in a specific US state (2-letter code)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "efcb2792-9bb0-4153-ad3c-a9cd93489d2b",
+              "name": "List of insurance products",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lineOfBusiness",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"products\": [\n    {\n      \"productCode\": \"string\",\n      \"productName\": \"string\",\n      \"lineOfBusiness\": \"string\",\n      \"availableStates\": [\n        \"string\",\n        \"string\"\n      ],\n      \"effectiveDate\": \"1970-11-12\"\n    },\n    {\n      \"productCode\": \"string\",\n      \"productName\": \"string\",\n      \"lineOfBusiness\": \"string\",\n      \"availableStates\": [\n        \"string\",\n        \"string\"\n      ],\n      \"effectiveDate\": \"2023-05-18\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.duckcreek.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "policies:read policies:write claims:read claims:write billing:read"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://api.duckcreek.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e53988d6-05a8-4ee4-8c44-1904557787e2",
+    "name": "Duck Creek Policy Administration Billing Products API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Duck Creek Policy Administration API enables product configuration, premium calculation, policy lifecycle management, and policy issuance for P&C and specialty insurance carriers. Duck Creek Anywhere provides 2,600+ RESTful APIs across all Duck Creek applications using open standards. Supports end-to-end policy management from quoting through renewal.\n\nContact Support:\n Name: Duck Creek Support",
+      "type": "text/plain"
+    }
+  }
+}

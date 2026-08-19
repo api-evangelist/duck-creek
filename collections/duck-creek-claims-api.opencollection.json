@@ -1,0 +1,96 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Duck Creek Policy Administration Billing Claims API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://api.duckcreek.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Claims",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List claims",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.duckcreek.com/v1/claims",
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "query",
+                "description": "Filter claims for a specific policy"
+              },
+              {
+                "name": "claimStatus",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "lossDateAfter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of claims for accessible policies."
+        },
+        {
+          "info": {
+            "name": "Report a new claim",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.duckcreek.com/v1/claims",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new first notice of loss (FNOL) for an existing policy."
+        },
+        {
+          "info": {
+            "name": "Get claim details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.duckcreek.com/v1/claims/:claimId",
+            "params": [
+              {
+                "name": "claimId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns full details for a specific insurance claim."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

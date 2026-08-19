@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Duck Creek Policy Administration Billing API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://api.duckcreek.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Billing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List billing accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.duckcreek.com/v1/billing/accounts",
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns billing accounts associated with insurance policies."
+        },
+        {
+          "info": {
+            "name": "List invoices for a billing account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.duckcreek.com/v1/billing/accounts/:accountId/invoices",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns invoices (installment bills) for a billing account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

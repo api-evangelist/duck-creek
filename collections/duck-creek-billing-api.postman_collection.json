@@ -1,0 +1,260 @@
+{
+  "item": [
+    {
+      "id": "8b5bf65d-8075-4ebc-a5d6-c6744ac4a13d",
+      "name": "Billing",
+      "description": {
+        "content": "Billing account and invoice management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c4cb4486-599a-4ae5-8d8e-9afd39a8217d",
+          "name": "List billing accounts",
+          "request": {
+            "name": "List billing accounts",
+            "description": {
+              "content": "Returns billing accounts associated with insurance policies.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "billing",
+                "accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "policyId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "04456cf9-65f1-4e33-a94e-b00b4084f9ef",
+              "name": "List of billing accounts",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billing",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "policyId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accounts\": [\n    {\n      \"accountId\": \"string\",\n      \"policyId\": \"string\",\n      \"policyNumber\": \"string\",\n      \"balance\": 2868.2541486520054,\n      \"nextDueDate\": \"2019-08-02\",\n      \"nextDueAmount\": 1675.8439652092416,\n      \"paymentPlan\": \"DIRECT_BILL\"\n    },\n    {\n      \"accountId\": \"string\",\n      \"policyId\": \"string\",\n      \"policyNumber\": \"string\",\n      \"balance\": 4398.764052677812,\n      \"nextDueDate\": \"1992-10-10\",\n      \"nextDueAmount\": 4814.618422467442,\n      \"paymentPlan\": \"MONTHLY\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ac0499ab-1cda-428c-b330-eda3cd6b46fe",
+          "name": "List invoices for a billing account",
+          "request": {
+            "name": "List invoices for a billing account",
+            "description": {
+              "content": "Returns invoices (installment bills) for a billing account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "billing",
+                "accounts",
+                ":accountId",
+                "invoices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "245ce8a7-8ab4-4915-808f-4b7ac7baa19d",
+              "name": "List of invoices",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billing",
+                    "accounts",
+                    ":accountId",
+                    "invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"invoices\": [\n    {\n      \"invoiceId\": \"string\",\n      \"accountId\": \"string\",\n      \"invoiceDate\": \"1974-10-31\",\n      \"dueDate\": \"2020-02-08\",\n      \"amount\": 7466.124048487539,\n      \"status\": \"VOID\"\n    },\n    {\n      \"invoiceId\": \"string\",\n      \"accountId\": \"string\",\n      \"invoiceDate\": \"2016-10-19\",\n      \"dueDate\": \"1984-07-22\",\n      \"amount\": 8985.967332293161,\n      \"status\": \"DUE\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.duckcreek.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "policies:read policies:write claims:read claims:write billing:read"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://api.duckcreek.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f4ba41f9-9005-485d-9625-220c354cf02b",
+    "name": "Duck Creek Policy Administration Billing API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Duck Creek Policy Administration API enables product configuration, premium calculation, policy lifecycle management, and policy issuance for P&C and specialty insurance carriers. Duck Creek Anywhere provides 2,600+ RESTful APIs across all Duck Creek applications using open standards. Supports end-to-end policy management from quoting through renewal.\n\nContact Support:\n Name: Duck Creek Support",
+      "type": "text/plain"
+    }
+  }
+}

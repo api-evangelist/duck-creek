@@ -1,0 +1,182 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Duck Creek Policy Administration Billing Policies API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://api.duckcreek.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Policies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List insurance policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.duckcreek.com/v1/policies",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by policy status"
+              },
+              {
+                "name": "productCode",
+                "value": "",
+                "type": "query",
+                "description": "Filter by insurance product code"
+              },
+              {
+                "name": "effectiveAfter",
+                "value": "",
+                "type": "query",
+                "description": "Filter policies effective on or after this date (ISO 8601)"
+              },
+              {
+                "name": "effectiveBefore",
+                "value": "",
+                "type": "query",
+                "description": "Filter policies effective on or before this date"
+              },
+              {
+                "name": "insuredName",
+                "value": "",
+                "type": "query",
+                "description": "Filter by insured name (partial match)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of insurance policies. Supports filtering by policy status, product type, effective date range, and insured name."
+        },
+        {
+          "info": {
+            "name": "Create a new policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.duckcreek.com/v1/policies",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Issues a new insurance policy. The policy must first be quoted and underwriting requirements must be satisfied before issuance."
+        },
+        {
+          "info": {
+            "name": "Get policy details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.duckcreek.com/v1/policies/:policyId",
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique policy identifier"
+              }
+            ]
+          },
+          "docs": "Returns full details for a specific insurance policy."
+        },
+        {
+          "info": {
+            "name": "Update policy (endorsement)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.duckcreek.com/v1/policies/:policyId",
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies an in-force policy through an endorsement transaction."
+        },
+        {
+          "info": {
+            "name": "Cancel a policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.duckcreek.com/v1/policies/:policyId/cancel",
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancels an in-force insurance policy with a specified reason and effective date."
+        },
+        {
+          "info": {
+            "name": "Renew a policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.duckcreek.com/v1/policies/:policyId/renew",
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates the renewal process for an expiring policy."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

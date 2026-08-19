@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Duck Creek Policy Administration Billing Products API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://api.duckcreek.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List insurance products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.duckcreek.com/v1/products",
+            "params": [
+              {
+                "name": "lineOfBusiness",
+                "value": "",
+                "type": "query",
+                "description": "Filter by line of business"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Filter products available in a specific US state (2-letter code)"
+              }
+            ]
+          },
+          "docs": "Returns available insurance product definitions and configurations."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
