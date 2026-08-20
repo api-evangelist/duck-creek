@@ -152,6 +152,8 @@ apis:
   humanURL: https://www.duckcreek.com/product/anywhere-integration/
   baseURL: https://api.duckcreek.com
   tags:
+  - Product
+  tags_raw:
   - Products
   properties:
   - type: OpenAPI
