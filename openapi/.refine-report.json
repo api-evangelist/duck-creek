@@ -1,11 +1,7 @@
 {
   "provider": "duck-creek",
   "sources": [
-    "duck-creek-billing-api-openapi.yml",
-    "duck-creek-claims-api-openapi.yml",
-    "duck-creek-policies-api-openapi.yml",
-    "duck-creek-products-api-openapi.yml",
-    "duck-creek-quotes-api-openapi.yml"
+    "_original/duck-creek-policy-openapi.yml"
   ],
   "outputs": [
     "duck-creek-billing-api-openapi.yml",
@@ -17,6 +13,16 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "duck-creek-policy-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "duck-creek-billing-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "duck-creek-claims-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "duck-creek-policies-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "duck-creek-products-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "duck-creek-quotes-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

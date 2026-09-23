@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Duck Creek Policy Administration Billing Quotes API
+  title: Duck Creek Policy Administration Quotes API
   description: Duck Creek Policy Administration API enables product configuration, premium calculation, policy lifecycle management, and policy issuance for P&C and specialty insurance carriers. Duck Creek Anywhere provides 2,600+ RESTful APIs across all Duck Creek applications using open standards. Supports end-to-end policy management from quoting through renewal.
   version: 1.0.0
   contact:
@@ -41,41 +41,14 @@ paths:
         '400':
           $ref: '#/components/responses/BadRequest'
 components:
+  responses:
+    BadRequest:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    QuoteRequest:
-      type: object
-      required:
-      - productCode
-      - insured
-      - effectiveDate
-      properties:
-        productCode:
-          type: string
-        insured:
-          $ref: '#/components/schemas/Insured'
-        effectiveDate:
-          type: string
-          format: date
-        expirationDate:
-          type: string
-          format: date
-        coverages:
-          type: array
-          items:
-            $ref: '#/components/schemas/CoverageRequest'
-        agentCode:
-          type: string
-    CoverageRequest:
-      type: object
-      required:
-      - coverageCode
-      properties:
-        coverageCode:
-          type: string
-        limit:
-          type: number
-        deductible:
-          type: number
     Insured:
       type: object
       required:
@@ -147,6 +120,40 @@ components:
         expiresAt:
           type: string
           format: date-time
+    CoverageRequest:
+      type: object
+      required:
+      - coverageCode
+      properties:
+        coverageCode:
+          type: string
+        limit:
+          type: number
+        deductible:
+          type: number
+    QuoteRequest:
+      type: object
+      required:
+      - productCode
+      - insured
+      - effectiveDate
+      properties:
+        productCode:
+          type: string
+        insured:
+          $ref: '#/components/schemas/Insured'
+        effectiveDate:
+          type: string
+          format: date
+        expirationDate:
+          type: string
+          format: date
+        coverages:
+          type: array
+          items:
+            $ref: '#/components/schemas/CoverageRequest'
+        agentCode:
+          type: string
     Error:
       type: object
       properties:
@@ -158,13 +165,6 @@ components:
           type: array
           items:
             type: string
-  responses:
-    BadRequest:
-      description: Invalid request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     oauth2:
       type: oauth2
