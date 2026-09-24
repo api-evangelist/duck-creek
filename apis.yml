@@ -45,35 +45,6 @@ apis:
   description: Duck Creek Policy Administration API enables product configuration, premium calculation,
     policy lifecycle management, and policy issuance for P&C and specialty insurance carriers. Supports
     end-to-end policy management from quoting through renewal.
-- aid: duck-creek:duck-creek-billing-api
-  name: Duck Creek Billing API
-  tags:
-  - Billing
-  - Insurance
-  - P&C Insurance
-  - Payments
-  humanURL: https://www.duckcreek.com/product/duck-creek-platform/
-  baseURL: https://api.duckcreek.com
-  properties:
-  - url: https://www.duckcreek.com/product/duck-creek-platform/
-    type: Documentation
-  description: Duck Creek Billing API provides billing operations for insurance carriers including invoice
-    generation, payment processing, installment plans, and billing account management.
-- aid: duck-creek:duck-creek-claims-api
-  name: Duck Creek Claims API
-  tags:
-  - Claims
-  - Claims Management
-  - Insurance
-  - P&C Insurance
-  humanURL: https://www.duckcreek.com/product/duck-creek-platform/
-  baseURL: https://api.duckcreek.com
-  properties:
-  - url: https://www.duckcreek.com/product/duck-creek-platform/
-    type: Documentation
-  description: Duck Creek Claims API supports claims intake, adjudication workflow, reserve management,
-    and payment processing for P&C insurance carriers. Enables integration with third-party claims services
-    and data providers.
 - aid: duck-creek:duck-creek-payments-api
   name: Duck Creek Payments Orchestrator API
   tags:
@@ -92,12 +63,16 @@ apis:
     workflows including premium collection and claims disbursements. Provides reference documentation
     and how-to guides via the dedicated payments developer portal at developers.imbursepayments.com.
 - aid: duck-creek:duck-creek-billing-api
-  name: duck-creek Billing API
-  description: Billing account and invoice management
-  humanURL: https://www.duckcreek.com/product/anywhere-integration/
+  name: Duck Creek Billing API
+  description: Duck Creek Billing API provides billing operations for insurance carriers including invoice
+    generation, payment processing, installment plans, and billing account management.
+  humanURL: https://www.duckcreek.com/product/duck-creek-platform/
   baseURL: https://api.duckcreek.com
   tags:
   - Billing
+  - Insurance
+  - P&C Insurance
+  - Payments
   properties:
   - type: OpenAPI
     url: openapi/duck-creek-billing-api-openapi.yml
@@ -109,15 +84,20 @@ apis:
     url: https://solutioncenter.duckcreek.com/
   - type: SDKs
     url: https://www.duckcreek.com/content-exchange/anywhere_api_extension_sdk/
-  - type: GraphQL
-    url: graphql/duck-creek-graphql.md
+  - url: https://www.duckcreek.com/product/duck-creek-platform/
+    type: Documentation
 - aid: duck-creek:duck-creek-claims-api
-  name: duck-creek Claims API
-  description: Claims intake and management
-  humanURL: https://www.duckcreek.com/product/anywhere-integration/
+  name: Duck Creek Claims API
+  description: Duck Creek Claims API supports claims intake, adjudication workflow, reserve management,
+    and payment processing for P&C insurance carriers. Enables integration with third-party claims services
+    and data providers.
+  humanURL: https://www.duckcreek.com/product/duck-creek-platform/
   baseURL: https://api.duckcreek.com
   tags:
   - Claims
+  - Claims Management
+  - Insurance
+  - P&C Insurance
   properties:
   - type: OpenAPI
     url: openapi/duck-creek-claims-api-openapi.yml
@@ -129,8 +109,8 @@ apis:
     url: https://solutioncenter.duckcreek.com/
   - type: SDKs
     url: https://www.duckcreek.com/content-exchange/anywhere_api_extension_sdk/
-  - type: GraphQL
-    url: graphql/duck-creek-graphql.md
+  - url: https://www.duckcreek.com/product/duck-creek-platform/
+    type: Documentation
 - aid: duck-creek:duck-creek-policies-api
   name: duck-creek Policies API
   description: Insurance policy lifecycle management
@@ -149,8 +129,6 @@ apis:
     url: https://solutioncenter.duckcreek.com/
   - type: SDKs
     url: https://www.duckcreek.com/content-exchange/anywhere_api_extension_sdk/
-  - type: GraphQL
-    url: graphql/duck-creek-graphql.md
 - aid: duck-creek:duck-creek-products-api
   name: duck-creek Products API
   description: Insurance product definitions and configuration
@@ -171,8 +149,6 @@ apis:
     url: https://solutioncenter.duckcreek.com/
   - type: SDKs
     url: https://www.duckcreek.com/content-exchange/anywhere_api_extension_sdk/
-  - type: GraphQL
-    url: graphql/duck-creek-graphql.md
 - aid: duck-creek:duck-creek-quotes-api
   name: duck-creek Quotes API
   description: Policy quoting and rating
@@ -191,8 +167,6 @@ apis:
     url: https://solutioncenter.duckcreek.com/
   - type: SDKs
     url: https://www.duckcreek.com/content-exchange/anywhere_api_extension_sdk/
-  - type: GraphQL
-    url: graphql/duck-creek-graphql.md
 common:
 - type: AgenticAccess
   url: agentic-access/duck-creek-agentic-access.yml
