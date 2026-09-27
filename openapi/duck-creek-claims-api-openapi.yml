@@ -98,6 +98,41 @@ paths:
                 $ref: '#/components/schemas/Claim'
 components:
   schemas:
+    ClaimSummary:
+      type: object
+      properties:
+        claimId:
+          type: string
+        claimNumber:
+          type: string
+        policyId:
+          type: string
+        status:
+          type: string
+          enum:
+          - OPEN
+          - CLOSED
+          - DENIED
+          - PENDING
+        lossDate:
+          type: string
+          format: date
+        reportedDate:
+          type: string
+          format: date
+        lossType:
+          type: string
+        totalIncurred:
+          type: number
+    ClaimList:
+      type: object
+      properties:
+        total:
+          type: integer
+        claims:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClaimSummary'
     Claim:
       allOf:
       - $ref: '#/components/schemas/ClaimSummary'
@@ -126,41 +161,6 @@ components:
                 type: number
               expenses:
                 type: number
-    ClaimList:
-      type: object
-      properties:
-        total:
-          type: integer
-        claims:
-          type: array
-          items:
-            $ref: '#/components/schemas/ClaimSummary'
-    ClaimSummary:
-      type: object
-      properties:
-        claimId:
-          type: string
-        claimNumber:
-          type: string
-        policyId:
-          type: string
-        status:
-          type: string
-          enum:
-          - OPEN
-          - CLOSED
-          - DENIED
-          - PENDING
-        lossDate:
-          type: string
-          format: date
-        reportedDate:
-          type: string
-          format: date
-        lossType:
-          type: string
-        totalIncurred:
-          type: number
     ClaimRequest:
       type: object
       required:

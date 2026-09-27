@@ -41,85 +41,7 @@ paths:
         '400':
           $ref: '#/components/responses/BadRequest'
 components:
-  responses:
-    BadRequest:
-      description: Invalid request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Insured:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        type:
-          type: string
-          enum:
-          - INDIVIDUAL
-          - BUSINESS
-        dateOfBirth:
-          type: string
-          format: date
-        ssn:
-          type: string
-          description: Social security number (masked)
-        address:
-          $ref: '#/components/schemas/Address'
-        phone:
-          type: string
-        email:
-          type: string
-          format: email
-    Address:
-      type: object
-      properties:
-        street1:
-          type: string
-        street2:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-          pattern: ^[A-Z]{2}$
-        zipCode:
-          type: string
-        country:
-          type: string
-          default: US
-    Quote:
-      type: object
-      properties:
-        quoteId:
-          type: string
-        status:
-          type: string
-          enum:
-          - RATED
-          - REFERRED
-          - DECLINED
-        totalPremium:
-          type: number
-        premiumBreakdown:
-          type: array
-          items:
-            type: object
-            properties:
-              coverageCode:
-                type: string
-              premium:
-                type: number
-        underwritingMessages:
-          type: array
-          items:
-            type: string
-        expiresAt:
-          type: string
-          format: date-time
     CoverageRequest:
       type: object
       required:
@@ -154,6 +76,77 @@ components:
             $ref: '#/components/schemas/CoverageRequest'
         agentCode:
           type: string
+    Quote:
+      type: object
+      properties:
+        quoteId:
+          type: string
+        status:
+          type: string
+          enum:
+          - RATED
+          - REFERRED
+          - DECLINED
+        totalPremium:
+          type: number
+        premiumBreakdown:
+          type: array
+          items:
+            type: object
+            properties:
+              coverageCode:
+                type: string
+              premium:
+                type: number
+        underwritingMessages:
+          type: array
+          items:
+            type: string
+        expiresAt:
+          type: string
+          format: date-time
+    Address:
+      type: object
+      properties:
+        street1:
+          type: string
+        street2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+          pattern: ^[A-Z]{2}$
+        zipCode:
+          type: string
+        country:
+          type: string
+          default: US
+    Insured:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+          - INDIVIDUAL
+          - BUSINESS
+        dateOfBirth:
+          type: string
+          format: date
+        ssn:
+          type: string
+          description: Social security number (masked)
+        address:
+          $ref: '#/components/schemas/Address'
+        phone:
+          type: string
+        email:
+          type: string
+          format: email
     Error:
       type: object
       properties:
@@ -165,6 +158,13 @@ components:
           type: array
           items:
             type: string
+  responses:
+    BadRequest:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     oauth2:
       type: oauth2

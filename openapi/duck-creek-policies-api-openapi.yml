@@ -208,7 +208,66 @@ paths:
               schema:
                 $ref: '#/components/schemas/Policy'
 components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    CoverageRequest:
+      type: object
+      required:
+      - coverageCode
+      properties:
+        coverageCode:
+          type: string
+        limit:
+          type: number
+        deductible:
+          type: number
+    Policy:
+      allOf:
+      - $ref: '#/components/schemas/PolicySummary'
+      - type: object
+        properties:
+          insured:
+            $ref: '#/components/schemas/Insured'
+          coverages:
+            type: array
+            items:
+              $ref: '#/components/schemas/Coverage'
+          endorsements:
+            type: array
+            items:
+              $ref: '#/components/schemas/Endorsement'
+          underwritingMessages:
+            type: array
+            items:
+              type: string
+          writingCompany:
+            type: string
+          agentCode:
+            type: string
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
     Endorsement:
       type: object
       properties:
@@ -221,6 +280,90 @@ components:
           format: date
         premiumChange:
           type: number
+    PolicyUpdateRequest:
+      type: object
+      properties:
+        endorsementEffectiveDate:
+          type: string
+          format: date
+        reason:
+          type: string
+        coverages:
+          type: array
+          items:
+            $ref: '#/components/schemas/CoverageRequest'
+    Coverage:
+      type: object
+      properties:
+        coverageCode:
+          type: string
+        coverageName:
+          type: string
+        limit:
+          type: number
+        deductible:
+          type: number
+        premium:
+          type: number
+    PolicyList:
+      type: object
+      properties:
+        total:
+          type: integer
+        offset:
+          type: integer
+        policies:
+          type: array
+          items:
+            $ref: '#/components/schemas/PolicySummary'
+    Address:
+      type: object
+      properties:
+        street1:
+          type: string
+        street2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+          pattern: ^[A-Z]{2}$
+        zipCode:
+          type: string
+        country:
+          type: string
+          default: US
+    PolicySummary:
+      type: object
+      properties:
+        policyId:
+          type: string
+        policyNumber:
+          type: string
+        status:
+          type: string
+          enum:
+          - QUOTED
+          - IN_FORCE
+          - CANCELLED
+          - EXPIRED
+          - PENDING_CANCEL
+          - RENEWAL
+        productCode:
+          type: string
+        lineOfBusiness:
+          type: string
+        effectiveDate:
+          type: string
+          format: date
+        expirationDate:
+          type: string
+          format: date
+        insuredName:
+          type: string
+        totalPremium:
+          type: number
+          format: double
     PolicyRequest:
       type: object
       required:
@@ -271,52 +414,17 @@ components:
         email:
           type: string
           format: email
-    Policy:
-      allOf:
-      - $ref: '#/components/schemas/PolicySummary'
-      - type: object
-        properties:
-          insured:
-            $ref: '#/components/schemas/Insured'
-          coverages:
-            type: array
-            items:
-              $ref: '#/components/schemas/Coverage'
-          endorsements:
-            type: array
-            items:
-              $ref: '#/components/schemas/Endorsement'
-          underwritingMessages:
-            type: array
-            items:
-              type: string
-          writingCompany:
-            type: string
-          agentCode:
-            type: string
-          createdAt:
-            type: string
-            format: date-time
-          updatedAt:
-            type: string
-            format: date-time
-    Address:
+    Error:
       type: object
       properties:
-        street1:
+        code:
           type: string
-        street2:
+        message:
           type: string
-        city:
-          type: string
-        state:
-          type: string
-          pattern: ^[A-Z]{2}$
-        zipCode:
-          type: string
-        country:
-          type: string
-          default: US
+        details:
+          type: array
+          items:
+            type: string
     CancellationRequest:
       type: object
       required:
@@ -335,114 +443,6 @@ components:
           format: date
         notes:
           type: string
-    PolicyList:
-      type: object
-      properties:
-        total:
-          type: integer
-        offset:
-          type: integer
-        policies:
-          type: array
-          items:
-            $ref: '#/components/schemas/PolicySummary'
-    PolicyUpdateRequest:
-      type: object
-      properties:
-        endorsementEffectiveDate:
-          type: string
-          format: date
-        reason:
-          type: string
-        coverages:
-          type: array
-          items:
-            $ref: '#/components/schemas/CoverageRequest'
-    CoverageRequest:
-      type: object
-      required:
-      - coverageCode
-      properties:
-        coverageCode:
-          type: string
-        limit:
-          type: number
-        deductible:
-          type: number
-    Coverage:
-      type: object
-      properties:
-        coverageCode:
-          type: string
-        coverageName:
-          type: string
-        limit:
-          type: number
-        deductible:
-          type: number
-        premium:
-          type: number
-    PolicySummary:
-      type: object
-      properties:
-        policyId:
-          type: string
-        policyNumber:
-          type: string
-        status:
-          type: string
-          enum:
-          - QUOTED
-          - IN_FORCE
-          - CANCELLED
-          - EXPIRED
-          - PENDING_CANCEL
-          - RENEWAL
-        productCode:
-          type: string
-        lineOfBusiness:
-          type: string
-        effectiveDate:
-          type: string
-          format: date
-        expirationDate:
-          type: string
-          format: date
-        insuredName:
-          type: string
-        totalPremium:
-          type: number
-          format: double
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        details:
-          type: array
-          items:
-            type: string
-  responses:
-    BadRequest:
-      description: Invalid request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     oauth2:
       type: oauth2

@@ -73,35 +73,6 @@ paths:
                 $ref: '#/components/schemas/InvoiceList'
 components:
   schemas:
-    Invoice:
-      type: object
-      properties:
-        invoiceId:
-          type: string
-        accountId:
-          type: string
-        invoiceDate:
-          type: string
-          format: date
-        dueDate:
-          type: string
-          format: date
-        amount:
-          type: number
-        status:
-          type: string
-          enum:
-          - DUE
-          - PAID
-          - OVERDUE
-          - VOID
-    InvoiceList:
-      type: object
-      properties:
-        invoices:
-          type: array
-          items:
-            $ref: '#/components/schemas/Invoice'
     BillingAccount:
       type: object
       properties:
@@ -133,6 +104,35 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BillingAccount'
+    Invoice:
+      type: object
+      properties:
+        invoiceId:
+          type: string
+        accountId:
+          type: string
+        invoiceDate:
+          type: string
+          format: date
+        dueDate:
+          type: string
+          format: date
+        amount:
+          type: number
+        status:
+          type: string
+          enum:
+          - DUE
+          - PAID
+          - OVERDUE
+          - VOID
+    InvoiceList:
+      type: object
+      properties:
+        invoices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Invoice'
   securitySchemes:
     oauth2:
       type: oauth2
