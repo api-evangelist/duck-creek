@@ -208,37 +208,98 @@ paths:
               schema:
                 $ref: '#/components/schemas/Policy'
 components:
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    CoverageRequest:
+    CancellationRequest:
       type: object
       required:
-      - coverageCode
+      - cancellationReason
+      - effectiveDate
       properties:
-        coverageCode:
+        cancellationReason:
           type: string
-        limit:
+          enum:
+          - INSURED_REQUEST
+          - NON_PAYMENT
+          - UNDERWRITING
+          - COMPANY_CANCELLED
+        effectiveDate:
+          type: string
+          format: date
+        notes:
+          type: string
+    Insured:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+          - INDIVIDUAL
+          - BUSINESS
+        dateOfBirth:
+          type: string
+          format: date
+        ssn:
+          type: string
+          description: Social security number (masked)
+        address:
+          $ref: '#/components/schemas/Address'
+        phone:
+          type: string
+        email:
+          type: string
+          format: email
+    PolicySummary:
+      type: object
+      properties:
+        policyId:
+          type: string
+        policyNumber:
+          type: string
+        status:
+          type: string
+          enum:
+          - QUOTED
+          - IN_FORCE
+          - CANCELLED
+          - EXPIRED
+          - PENDING_CANCEL
+          - RENEWAL
+        productCode:
+          type: string
+        lineOfBusiness:
+          type: string
+        effectiveDate:
+          type: string
+          format: date
+        expirationDate:
+          type: string
+          format: date
+        insuredName:
+          type: string
+        totalPremium:
           type: number
-        deductible:
-          type: number
+          format: double
+    Address:
+      type: object
+      properties:
+        street1:
+          type: string
+        street2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+          pattern: ^[A-Z]{2}$
+        zipCode:
+          type: string
+        country:
+          type: string
+          default: US
     Policy:
       allOf:
       - $ref: '#/components/schemas/PolicySummary'
@@ -280,90 +341,6 @@ components:
           format: date
         premiumChange:
           type: number
-    PolicyUpdateRequest:
-      type: object
-      properties:
-        endorsementEffectiveDate:
-          type: string
-          format: date
-        reason:
-          type: string
-        coverages:
-          type: array
-          items:
-            $ref: '#/components/schemas/CoverageRequest'
-    Coverage:
-      type: object
-      properties:
-        coverageCode:
-          type: string
-        coverageName:
-          type: string
-        limit:
-          type: number
-        deductible:
-          type: number
-        premium:
-          type: number
-    PolicyList:
-      type: object
-      properties:
-        total:
-          type: integer
-        offset:
-          type: integer
-        policies:
-          type: array
-          items:
-            $ref: '#/components/schemas/PolicySummary'
-    Address:
-      type: object
-      properties:
-        street1:
-          type: string
-        street2:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-          pattern: ^[A-Z]{2}$
-        zipCode:
-          type: string
-        country:
-          type: string
-          default: US
-    PolicySummary:
-      type: object
-      properties:
-        policyId:
-          type: string
-        policyNumber:
-          type: string
-        status:
-          type: string
-          enum:
-          - QUOTED
-          - IN_FORCE
-          - CANCELLED
-          - EXPIRED
-          - PENDING_CANCEL
-          - RENEWAL
-        productCode:
-          type: string
-        lineOfBusiness:
-          type: string
-        effectiveDate:
-          type: string
-          format: date
-        expirationDate:
-          type: string
-          format: date
-        insuredName:
-          type: string
-        totalPremium:
-          type: number
-          format: double
     PolicyRequest:
       type: object
       required:
@@ -389,31 +366,53 @@ components:
             $ref: '#/components/schemas/CoverageRequest'
         agentCode:
           type: string
-    Insured:
+    PolicyList:
+      type: object
+      properties:
+        total:
+          type: integer
+        offset:
+          type: integer
+        policies:
+          type: array
+          items:
+            $ref: '#/components/schemas/PolicySummary'
+    CoverageRequest:
       type: object
       required:
-      - name
+      - coverageCode
       properties:
-        name:
+        coverageCode:
           type: string
-        type:
+        limit:
+          type: number
+        deductible:
+          type: number
+    Coverage:
+      type: object
+      properties:
+        coverageCode:
           type: string
-          enum:
-          - INDIVIDUAL
-          - BUSINESS
-        dateOfBirth:
+        coverageName:
+          type: string
+        limit:
+          type: number
+        deductible:
+          type: number
+        premium:
+          type: number
+    PolicyUpdateRequest:
+      type: object
+      properties:
+        endorsementEffectiveDate:
           type: string
           format: date
-        ssn:
+        reason:
           type: string
-          description: Social security number (masked)
-        address:
-          $ref: '#/components/schemas/Address'
-        phone:
-          type: string
-        email:
-          type: string
-          format: email
+        coverages:
+          type: array
+          items:
+            $ref: '#/components/schemas/CoverageRequest'
     Error:
       type: object
       properties:
@@ -425,24 +424,25 @@ components:
           type: array
           items:
             type: string
-    CancellationRequest:
-      type: object
-      required:
-      - cancellationReason
-      - effectiveDate
-      properties:
-        cancellationReason:
-          type: string
-          enum:
-          - INSURED_REQUEST
-          - NON_PAYMENT
-          - UNDERWRITING
-          - COMPANY_CANCELLED
-        effectiveDate:
-          type: string
-          format: date
-        notes:
-          type: string
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     oauth2:
       type: oauth2

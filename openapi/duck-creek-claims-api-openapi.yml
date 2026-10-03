@@ -124,15 +124,6 @@ components:
           type: string
         totalIncurred:
           type: number
-    ClaimList:
-      type: object
-      properties:
-        total:
-          type: integer
-        claims:
-          type: array
-          items:
-            $ref: '#/components/schemas/ClaimSummary'
     Claim:
       allOf:
       - $ref: '#/components/schemas/ClaimSummary'
@@ -161,6 +152,15 @@ components:
                 type: number
               expenses:
                 type: number
+    ClaimList:
+      type: object
+      properties:
+        total:
+          type: integer
+        claims:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClaimSummary'
     ClaimRequest:
       type: object
       required:

@@ -42,17 +42,6 @@ paths:
           $ref: '#/components/responses/BadRequest'
 components:
   schemas:
-    CoverageRequest:
-      type: object
-      required:
-      - coverageCode
-      properties:
-        coverageCode:
-          type: string
-        limit:
-          type: number
-        deductible:
-          type: number
     QuoteRequest:
       type: object
       required:
@@ -76,6 +65,48 @@ components:
             $ref: '#/components/schemas/CoverageRequest'
         agentCode:
           type: string
+    Insured:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+          - INDIVIDUAL
+          - BUSINESS
+        dateOfBirth:
+          type: string
+          format: date
+        ssn:
+          type: string
+          description: Social security number (masked)
+        address:
+          $ref: '#/components/schemas/Address'
+        phone:
+          type: string
+        email:
+          type: string
+          format: email
+    Address:
+      type: object
+      properties:
+        street1:
+          type: string
+        street2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+          pattern: ^[A-Z]{2}$
+        zipCode:
+          type: string
+        country:
+          type: string
+          default: US
     Quote:
       type: object
       properties:
@@ -105,48 +136,17 @@ components:
         expiresAt:
           type: string
           format: date-time
-    Address:
-      type: object
-      properties:
-        street1:
-          type: string
-        street2:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-          pattern: ^[A-Z]{2}$
-        zipCode:
-          type: string
-        country:
-          type: string
-          default: US
-    Insured:
+    CoverageRequest:
       type: object
       required:
-      - name
+      - coverageCode
       properties:
-        name:
+        coverageCode:
           type: string
-        type:
-          type: string
-          enum:
-          - INDIVIDUAL
-          - BUSINESS
-        dateOfBirth:
-          type: string
-          format: date
-        ssn:
-          type: string
-          description: Social security number (masked)
-        address:
-          $ref: '#/components/schemas/Address'
-        phone:
-          type: string
-        email:
-          type: string
-          format: email
+        limit:
+          type: number
+        deductible:
+          type: number
     Error:
       type: object
       properties:
