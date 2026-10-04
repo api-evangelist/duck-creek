@@ -42,29 +42,17 @@ paths:
           $ref: '#/components/responses/BadRequest'
 components:
   schemas:
-    QuoteRequest:
+    Error:
       type: object
-      required:
-      - productCode
-      - insured
-      - effectiveDate
       properties:
-        productCode:
+        code:
           type: string
-        insured:
-          $ref: '#/components/schemas/Insured'
-        effectiveDate:
+        message:
           type: string
-          format: date
-        expirationDate:
-          type: string
-          format: date
-        coverages:
+        details:
           type: array
           items:
-            $ref: '#/components/schemas/CoverageRequest'
-        agentCode:
-          type: string
+            type: string
     Insured:
       type: object
       required:
@@ -90,23 +78,17 @@ components:
         email:
           type: string
           format: email
-    Address:
+    CoverageRequest:
       type: object
+      required:
+      - coverageCode
       properties:
-        street1:
+        coverageCode:
           type: string
-        street2:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-          pattern: ^[A-Z]{2}$
-        zipCode:
-          type: string
-        country:
-          type: string
-          default: US
+        limit:
+          type: number
+        deductible:
+          type: number
     Quote:
       type: object
       properties:
@@ -136,28 +118,46 @@ components:
         expiresAt:
           type: string
           format: date-time
-    CoverageRequest:
+    QuoteRequest:
       type: object
       required:
-      - coverageCode
+      - productCode
+      - insured
+      - effectiveDate
       properties:
-        coverageCode:
+        productCode:
           type: string
-        limit:
-          type: number
-        deductible:
-          type: number
-    Error:
-      type: object
-      properties:
-        code:
+        insured:
+          $ref: '#/components/schemas/Insured'
+        effectiveDate:
           type: string
-        message:
+          format: date
+        expirationDate:
           type: string
-        details:
+          format: date
+        coverages:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/CoverageRequest'
+        agentCode:
+          type: string
+    Address:
+      type: object
+      properties:
+        street1:
+          type: string
+        street2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+          pattern: ^[A-Z]{2}$
+        zipCode:
+          type: string
+        country:
+          type: string
+          default: US
   responses:
     BadRequest:
       description: Invalid request

@@ -53,13 +53,6 @@ paths:
                 $ref: '#/components/schemas/ProductList'
 components:
   schemas:
-    ProductList:
-      type: object
-      properties:
-        products:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProductSummary'
     ProductSummary:
       type: object
       properties:
@@ -76,6 +69,13 @@ components:
         effectiveDate:
           type: string
           format: date
+    ProductList:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductSummary'
   securitySchemes:
     oauth2:
       type: oauth2
