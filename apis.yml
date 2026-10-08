@@ -168,6 +168,12 @@ apis:
   - type: SDKs
     url: https://www.duckcreek.com/content-exchange/anywhere_api_extension_sdk/
 common:
+- type: Plans
+  url: plans/duck-creek-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/duck-creek-rate-limits.yml
+- type: FinOps
+  url: finops/duck-creek-finops.yml
 - type: AgenticAccess
   url: agentic-access/duck-creek-agentic-access.yml
 - type: TrustCenter
