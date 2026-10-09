@@ -1,0 +1,34 @@
+# Front Door AI Index — duck-creek — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: duck-creek
+  lexicon_version: '1.0'
+  probed_at: '2026-09-25'
+  host: www.duckcreek.com
+  final_host: www.duckcreek.com
+  ownership: own
+  owner: duck-creek
+  shares_host_with: null
+  inherited_from: null
+  alias_of: null
+  verdict: scored
+  score: 52
+  band: 6
+  band_label: dominant
+  host_score: 52
+  density: 17.78
+  words: 2924
+  tiers:
+    agentic: 32
+    core: 20
+    model: 0
+  ambiguous: 18
+  top_terms:
+    agentic: 27
+    AI: 20
+    intelligence: 9
+    agent: 6
+    AI agent: 3
+    automation: 3
+    MCP: 2
