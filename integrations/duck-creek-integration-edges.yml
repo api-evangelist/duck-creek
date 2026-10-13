@@ -13,6 +13,36 @@ marketplace_apps:
   listed: 106
   note: partner-type Consulting (20) is a services relationship and is not written
 edges:
+- partner_name: Microsoft Azure Marketplace
+  partner: microsoft-azure
+  partner_match: aggregator
+  type: marketplace
+  marketplace: azure-marketplace
+  channel: distribution
+  relationship: platform-app
+  direction: provider-built
+  evidence: https://azuremarketplace.microsoft.com/en-us/marketplace/apps?search=Duck%20Creek%20Technologies%20Limited
+  listing_count: 1
+  apps:
+  - Duck Creek OnDemand - Transact Global
+  seller_name: Duck Creek Technologies Limited
+  detected_by: sweep-cloud-marketplaces.py
+  detected: '2026-10-13'
+- partner_name: Microsoft Azure Marketplace
+  partner: microsoft-azure
+  partner_match: aggregator
+  type: marketplace
+  marketplace: azure-marketplace
+  channel: distribution
+  relationship: platform-app
+  direction: provider-built
+  evidence: https://azuremarketplace.microsoft.com/en-us/marketplace/apps?search=Duck%20Creek%20Technologies
+  listing_count: 1
+  apps:
+  - Duck Creek OnDemand
+  seller_name: Duck Creek Technologies
+  detected_by: sweep-cloud-marketplaces.py
+  detected: '2026-10-13'
 - partner_name: CLARA Analytics
   app: CLARA Analytics
   partner: null
@@ -1365,8 +1395,8 @@ edges:
   detected: '2026-10-13'
 - partner_name: FRISS
   app: FRISS
-  partner: null
-  partner_match: null
+  partner: friss
+  partner_match: domain
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -1410,8 +1440,8 @@ edges:
   detected: '2026-10-13'
 - partner_name: Arity
   app: Arity
-  partner: null
-  partner_match: null
+  partner: arity
+  partner_match: domain
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -1602,34 +1632,4 @@ edges:
   category: Solution
   partner_domain: assuresign.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
-- partner_name: Microsoft Azure Marketplace
-  partner: microsoft-azure
-  partner_match: aggregator
-  type: marketplace
-  marketplace: azure-marketplace
-  channel: distribution
-  relationship: platform-app
-  direction: provider-built
-  evidence: https://azuremarketplace.microsoft.com/en-us/marketplace/apps?search=Duck%20Creek%20Technologies%20Limited
-  listing_count: 1
-  apps:
-  - Duck Creek OnDemand - Transact Global
-  seller_name: Duck Creek Technologies Limited
-  detected_by: sweep-cloud-marketplaces.py
-  detected: '2026-10-13'
-- partner_name: Microsoft Azure Marketplace
-  partner: microsoft-azure
-  partner_match: aggregator
-  type: marketplace
-  marketplace: azure-marketplace
-  channel: distribution
-  relationship: platform-app
-  direction: provider-built
-  evidence: https://azuremarketplace.microsoft.com/en-us/marketplace/apps?search=Duck%20Creek%20Technologies
-  listing_count: 1
-  apps:
-  - Duck Creek OnDemand
-  seller_name: Duck Creek Technologies
-  detected_by: sweep-cloud-marketplaces.py
   detected: '2026-10-13'
