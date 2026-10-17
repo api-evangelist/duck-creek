@@ -98,15 +98,6 @@ paths:
                 $ref: '#/components/schemas/Claim'
 components:
   schemas:
-    ClaimList:
-      type: object
-      properties:
-        total:
-          type: integer
-        claims:
-          type: array
-          items:
-            $ref: '#/components/schemas/ClaimSummary'
     ClaimSummary:
       type: object
       properties:
@@ -133,6 +124,15 @@ components:
           type: string
         totalIncurred:
           type: number
+    ClaimList:
+      type: object
+      properties:
+        total:
+          type: integer
+        claims:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClaimSummary'
     Claim:
       allOf:
       - $ref: '#/components/schemas/ClaimSummary'

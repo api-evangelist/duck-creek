@@ -42,6 +42,23 @@ paths:
           $ref: '#/components/responses/BadRequest'
 components:
   schemas:
+    Address:
+      type: object
+      properties:
+        street1:
+          type: string
+        street2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+          pattern: ^[A-Z]{2}$
+        zipCode:
+          type: string
+        country:
+          type: string
+          default: US
     Error:
       type: object
       properties:
@@ -53,42 +70,6 @@ components:
           type: array
           items:
             type: string
-    Insured:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        type:
-          type: string
-          enum:
-          - INDIVIDUAL
-          - BUSINESS
-        dateOfBirth:
-          type: string
-          format: date
-        ssn:
-          type: string
-          description: Social security number (masked)
-        address:
-          $ref: '#/components/schemas/Address'
-        phone:
-          type: string
-        email:
-          type: string
-          format: email
-    CoverageRequest:
-      type: object
-      required:
-      - coverageCode
-      properties:
-        coverageCode:
-          type: string
-        limit:
-          type: number
-        deductible:
-          type: number
     Quote:
       type: object
       properties:
@@ -118,6 +99,17 @@ components:
         expiresAt:
           type: string
           format: date-time
+    CoverageRequest:
+      type: object
+      required:
+      - coverageCode
+      properties:
+        coverageCode:
+          type: string
+        limit:
+          type: number
+        deductible:
+          type: number
     QuoteRequest:
       type: object
       required:
@@ -141,23 +133,31 @@ components:
             $ref: '#/components/schemas/CoverageRequest'
         agentCode:
           type: string
-    Address:
+    Insured:
       type: object
+      required:
+      - name
       properties:
-        street1:
+        name:
           type: string
-        street2:
+        type:
           type: string
-        city:
+          enum:
+          - INDIVIDUAL
+          - BUSINESS
+        dateOfBirth:
           type: string
-        state:
+          format: date
+        ssn:
           type: string
-          pattern: ^[A-Z]{2}$
-        zipCode:
+          description: Social security number (masked)
+        address:
+          $ref: '#/components/schemas/Address'
+        phone:
           type: string
-        country:
+        email:
           type: string
-          default: US
+          format: email
   responses:
     BadRequest:
       description: Invalid request

@@ -97,13 +97,6 @@ components:
           - QUARTERLY
           - MONTHLY
           - DIRECT_BILL
-    BillingAccountList:
-      type: object
-      properties:
-        accounts:
-          type: array
-          items:
-            $ref: '#/components/schemas/BillingAccount'
     Invoice:
       type: object
       properties:
@@ -133,6 +126,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Invoice'
+    BillingAccountList:
+      type: object
+      properties:
+        accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillingAccount'
   securitySchemes:
     oauth2:
       type: oauth2
