@@ -168,6 +168,11 @@ apis:
   - type: SDKs
     url: https://www.duckcreek.com/content-exchange/anywhere_api_extension_sdk/
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/duck-creek/overview
+- type: CapabilityMap
+  url: capabilities/duck-creek-capability-edges.yml
+  name: Duck Creek Business Capability Map
 - type: Plans
   url: plans/duck-creek-plans-pricing.yml
 - type: RateLimits
