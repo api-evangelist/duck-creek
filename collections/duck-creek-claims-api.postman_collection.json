@@ -1,83 +1,193 @@
 {
+  "info": {
+    "_postman_id": "8882722c-ad1c-4566-8470-369f0ab5b0e3",
+    "name": "Duck Creek Policy Administration Claims API",
+    "description": "Duck Creek Policy Administration API enables product configuration, premium calculation, policy lifecycle management, and policy issuance for P&C and specialty insurance carriers. Duck Creek Anywhere provides 2,600+ RESTful APIs across all Duck Creek applications using open standards. Supports end-to-end policy management from quoting through renewal.\n\nContact Support:\n Name: Duck Creek Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:21:50.000Z",
+    "updatedAt": "2026-10-22T02:21:50.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8882722c-ad1c-4566-8470-369f0ab5b0e3"
+  },
   "item": [
     {
-      "id": "b7c1714e-6463-4901-b9ce-9309f2363e69",
-      "name": "Claims",
-      "description": {
-        "content": "Claims intake and management",
-        "type": "text/plain"
-      },
+      "name": "claims",
       "item": [
         {
-          "id": "a83114d4-dd62-41dc-9d31-81e4fec4aa3b",
-          "name": "List claims",
-          "request": {
-            "name": "List claims",
-            "description": {
-              "content": "Returns a list of claims for accessible policies.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "claims"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "policyId",
-                  "value": "<string>",
-                  "description": "Filter claims for a specific policy"
+          "name": "{claimId}",
+          "item": [
+            {
+              "name": "Get claim details",
+              "id": "dfed3d9f-9700-4d45-a1e2-bd008f7507ee",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/claims/:claimId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "claims",
+                    ":claimId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "37349215-e567-4ae9-9929-3e9746341df4",
+                      "key": "claimId",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
                 },
+                "description": "Returns full details for a specific insurance claim."
+              },
+              "response": [
                 {
-                  "disabled": false,
-                  "key": "claimStatus",
-                  "value": "<string>"
-                },
-                {
-                  "disabled": false,
-                  "key": "lossDateAfter",
-                  "value": "<date>"
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "50"
+                  "id": "ea81b1aa-5b31-434e-9745-89f0a422e1e7",
+                  "name": "Claim details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/claims/:claimId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "claims",
+                        ":claimId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "claimId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"claimId\": \"<string>\",\n  \"claimNumber\": \"<string>\",\n  \"policyId\": \"<string>\",\n  \"status\": \"DENIED\",\n  \"lossDate\": \"<date>\",\n  \"reportedDate\": \"<date>\",\n  \"lossType\": \"<string>\",\n  \"totalIncurred\": \"<number>\",\n  \"description\": \"<string>\",\n  \"claimant\": {\n    \"name\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"adjuster\": {\n    \"name\": \"<string>\",\n    \"email\": \"<string>\"\n  },\n  \"reserves\": {\n    \"indemnity\": \"<number>\",\n    \"expenses\": \"<number>\"\n  }\n}",
+                  "createdAt": "2026-10-22T02:21:51.000Z",
+                  "updatedAt": "2026-10-22T02:21:51.000Z",
+                  "uid": "35240-ea81b1aa-5b31-434e-9745-89f0a422e1e7"
                 }
               ],
-              "variable": []
-            },
+              "createdAt": "2026-10-22T02:21:51.000Z",
+              "updatedAt": "2026-10-22T02:21:51.000Z",
+              "uid": "35240-dfed3d9f-9700-4d45-a1e2-bd008f7507ee"
+            }
+          ],
+          "id": "d7cdb04f-c891-4c45-9ac5-9770527ee2f8",
+          "createdAt": "2026-10-22T02:21:51.000Z",
+          "updatedAt": "2026-10-22T02:21:51.000Z",
+          "uid": "35240-d7cdb04f-c891-4c45-9ac5-9770527ee2f8"
+        },
+        {
+          "name": "List claims",
+          "id": "3ca468cf-11e2-4cea-ab7f-3bb39d437b10",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
+            "url": {
+              "raw": "{{baseUrl}}/claims?policyId=<string>&claimStatus=CLOSED&lossDateAfter=<date>&limit=50",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "claims"
+              ],
+              "query": [
+                {
+                  "description": "Filter claims for a specific policy",
+                  "key": "policyId",
+                  "value": "<string>"
+                },
+                {
+                  "key": "claimStatus",
+                  "value": "CLOSED"
+                },
+                {
+                  "key": "lossDateAfter",
+                  "value": "<date>"
+                },
+                {
+                  "key": "limit",
+                  "value": "50"
+                }
+              ]
+            },
+            "description": "Returns a list of claims for accessible policies."
           },
           "response": [
             {
-              "id": "b910dac6-dabe-4086-97c4-101ca93e1651",
+              "id": "b6c1c2ff-d382-419d-ab83-416432e3e873",
               "name": "List of claims",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "claims"
-                  ],
+                  "raw": "{{baseUrl}}/claims?policyId=<string>&claimStatus=CLOSED&lossDateAfter=<date>&limit=50",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "claims"
+                  ],
                   "query": [
                     {
+                      "description": "Filter claims for a specific policy",
                       "key": "policyId",
                       "value": "<string>"
                     },
                     {
                       "key": "claimStatus",
-                      "value": "<string>"
+                      "value": "CLOSED"
                     },
                     {
                       "key": "lossDateAfter",
@@ -87,63 +197,38 @@
                       "key": "limit",
                       "value": "50"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"total\": 8844,\n  \"claims\": [\n    {\n      \"claimId\": \"string\",\n      \"claimNumber\": \"string\",\n      \"policyId\": \"string\",\n      \"status\": \"PENDING\",\n      \"lossDate\": \"2017-05-12\",\n      \"reportedDate\": \"2020-04-20\",\n      \"lossType\": \"string\",\n      \"totalIncurred\": 5932.241026614189\n    },\n    {\n      \"claimId\": \"string\",\n      \"claimNumber\": \"string\",\n      \"policyId\": \"string\",\n      \"status\": \"PENDING\",\n      \"lossDate\": \"1975-11-18\",\n      \"reportedDate\": \"2000-02-25\",\n      \"lossType\": \"string\",\n      \"totalIncurred\": 7512.238948986016\n    }\n  ]\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"claims\": [\n    {\n      \"claimId\": \"<string>\",\n      \"claimNumber\": \"<string>\",\n      \"policyId\": \"<string>\",\n      \"status\": \"OPEN\",\n      \"lossDate\": \"<date>\",\n      \"reportedDate\": \"<date>\",\n      \"lossType\": \"<string>\",\n      \"totalIncurred\": \"<number>\"\n    },\n    {\n      \"claimId\": \"<string>\",\n      \"claimNumber\": \"<string>\",\n      \"policyId\": \"<string>\",\n      \"status\": \"DENIED\",\n      \"lossDate\": \"<date>\",\n      \"reportedDate\": \"<date>\",\n      \"lossType\": \"<string>\",\n      \"totalIncurred\": \"<number>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-22T02:21:51.000Z",
+              "updatedAt": "2026-10-22T02:21:51.000Z",
+              "uid": "35240-b6c1c2ff-d382-419d-ab83-416432e3e873"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T02:21:51.000Z",
+          "updatedAt": "2026-10-22T02:21:51.000Z",
+          "uid": "35240-3ca468cf-11e2-4cea-ab7f-3bb39d437b10"
         },
         {
-          "id": "1aae394c-bde2-40ca-a37f-ba807937e923",
           "name": "Report a new claim",
+          "id": "449db8f1-3065-45a7-9288-91b3899276ce",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Report a new claim",
-            "description": {
-              "content": "Creates a new first notice of loss (FNOL) for an existing policy.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "claims"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
+            "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
@@ -154,182 +239,94 @@
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": null,
             "body": {
               "mode": "raw",
               "raw": "{\n  \"policyId\": \"<string>\",\n  \"lossDate\": \"<date>\",\n  \"lossType\": \"<string>\",\n  \"description\": \"<string>\",\n  \"claimant\": {\n    \"name\": \"<string>\",\n    \"phone\": \"<string>\"\n  }\n}",
               "options": {
                 "raw": {
+                  "headerFamily": "json",
                   "language": "json"
                 }
               }
-            }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/claims",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "claims"
+              ]
+            },
+            "description": "Creates a new first notice of loss (FNOL) for an existing policy."
           },
           "response": [
             {
-              "id": "40a6d7e2-4611-4a31-a6ed-1fe6f58a411c",
+              "id": "0d4a9b89-6352-45c8-993f-e54f0765da15",
               "name": "Claim created",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "claims"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"policyId\": \"<string>\",\n  \"lossDate\": \"<date>\",\n  \"lossType\": \"<string>\",\n  \"description\": \"<string>\",\n  \"claimant\": {\n    \"name\": \"<string>\",\n    \"phone\": \"<string>\"\n  }\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/claims",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "claims"
+                  ]
                 }
               },
               "status": "Created",
               "code": 201,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"claimId\": \"string\",\n  \"claimNumber\": \"string\",\n  \"policyId\": \"string\",\n  \"status\": \"DENIED\",\n  \"lossDate\": \"2016-10-26\",\n  \"reportedDate\": \"1956-01-21\",\n  \"lossType\": \"string\",\n  \"totalIncurred\": 2415.8023214433542,\n  \"description\": \"string\",\n  \"claimant\": {\n    \"name\": \"string\",\n    \"phone\": \"string\"\n  },\n  \"adjuster\": {\n    \"name\": \"string\",\n    \"email\": \"string\"\n  },\n  \"reserves\": {\n    \"indemnity\": 189.66586770516437,\n    \"expenses\": 5537.546419274147\n  }\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"claimId\": \"<string>\",\n  \"claimNumber\": \"<string>\",\n  \"policyId\": \"<string>\",\n  \"status\": \"DENIED\",\n  \"lossDate\": \"<date>\",\n  \"reportedDate\": \"<date>\",\n  \"lossType\": \"<string>\",\n  \"totalIncurred\": \"<number>\",\n  \"description\": \"<string>\",\n  \"claimant\": {\n    \"name\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"adjuster\": {\n    \"name\": \"<string>\",\n    \"email\": \"<string>\"\n  },\n  \"reserves\": {\n    \"indemnity\": \"<number>\",\n    \"expenses\": \"<number>\"\n  }\n}",
+              "createdAt": "2026-10-22T02:21:51.000Z",
+              "updatedAt": "2026-10-22T02:21:51.000Z",
+              "uid": "35240-0d4a9b89-6352-45c8-993f-e54f0765da15"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "69220385-edc0-48c0-a217-2d63ec14e6b7",
-          "name": "Get claim details",
-          "request": {
-            "name": "Get claim details",
-            "description": {
-              "content": "Returns full details for a specific insurance claim.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "claims",
-                ":claimId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "claimId",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "b3c997c2-4d2a-4c96-b5f5-bd72d1b07aca",
-              "name": "Claim details",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "claims",
-                    ":claimId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "claimId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"claimId\": \"string\",\n  \"claimNumber\": \"string\",\n  \"policyId\": \"string\",\n  \"status\": \"DENIED\",\n  \"lossDate\": \"2016-10-26\",\n  \"reportedDate\": \"1956-01-21\",\n  \"lossType\": \"string\",\n  \"totalIncurred\": 2415.8023214433542,\n  \"description\": \"string\",\n  \"claimant\": {\n    \"name\": \"string\",\n    \"phone\": \"string\"\n  },\n  \"adjuster\": {\n    \"name\": \"string\",\n    \"email\": \"string\"\n  },\n  \"reserves\": {\n    \"indemnity\": 189.66586770516437,\n    \"expenses\": 5537.546419274147\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T02:21:51.000Z",
+          "updatedAt": "2026-10-22T02:21:51.000Z",
+          "uid": "35240-449db8f1-3065-45a7-9288-91b3899276ce"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.duckcreek.com/v1",
-      "key": "baseUrl"
+      "id": "7575e835-4f34-4bba-933b-1558ed2f9534",
+      "createdAt": "2026-10-22T02:21:51.000Z",
+      "updatedAt": "2026-10-22T02:21:51.000Z",
+      "uid": "35240-7575e835-4f34-4bba-933b-1558ed2f9534"
     }
   ],
   "auth": {
@@ -337,25 +334,25 @@
     "oauth2": [
       {
         "key": "scope",
-        "value": "policies:read policies:write claims:read claims:write billing:read"
+        "value": "policies:read policies:write claims:read claims:write billing:read",
+        "type": "string"
       },
       {
         "key": "accessTokenUrl",
-        "value": "https://api.duckcreek.com/oauth/token"
+        "value": "https://api.duckcreek.com/oauth/token",
+        "type": "string"
       },
       {
         "key": "grant_type",
-        "value": "client_credentials"
+        "value": "client_credentials",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "6a29d4c1-4d26-48fb-a41e-435defc1a1ce",
-    "name": "Duck Creek Policy Administration Billing Claims API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Duck Creek Policy Administration API enables product configuration, premium calculation, policy lifecycle management, and policy issuance for P&C and specialty insurance carriers. Duck Creek Anywhere provides 2,600+ RESTful APIs across all Duck Creek applications using open standards. Supports end-to-end policy management from quoting through renewal.\n\nContact Support:\n Name: Duck Creek Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.duckcreek.com/v1"
     }
-  }
+  ]
 }
