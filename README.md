@@ -1,4 +1,4 @@
-# duck-creek (duck-creek)
+# Duck Creek
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,139 +66,197 @@
 
 The path forward to competing today and in the future requires an open platform designed to sit at the center of your P&C solutions – and seamlessly.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/duck-creek/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/duck-creek/refs/heads/main/apis.yml)
+**Areas:** Insurance · Payments · Claims · Payment Processing · Product
 
-## Timestamps
+## Duck Creek on APIs.io
 
-- **Modified:** 2026-05-19
+Everything profiled for Duck Creek is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/duck-creek/](https://apis.io/providers/duck-creek/)** — or go straight to one of the APIs or properties below.
 
-## APIs
+### APIs (7)
 
-### Duck Creek Anywhere REST API
+- [Duck Creek Policy Administration API](https://apis.io/apis/duck-creek/duck-creek-policy-api/) — Duck Creek Policy Administration API enables product configuration, premium calculation, policy lifecycle management, and policy issuance for P&C and…
+- [Duck Creek Payments Orchestrator API](https://apis.io/apis/duck-creek/duck-creek-payments-api/) — Duck Creek Payments Orchestrator API enables insurance carriers to orchestrate payment workflows including premium collection and claims disbursements.…
+- [Duck Creek Billing API](https://apis.io/apis/duck-creek/duck-creek-billing-api/) — Duck Creek Billing API provides billing operations for insurance carriers including invoice generation, payment processing, installment plans, and billing…
+- [Duck Creek Claims API](https://apis.io/apis/duck-creek/duck-creek-claims-api/) — Duck Creek Claims API supports claims intake, adjudication workflow, reserve management, and payment processing for P&C insurance carriers. Enables…
+- [duck-creek Policies API](https://apis.io/apis/duck-creek/duck-creek-policies-api/) — Insurance policy lifecycle management
+- [duck-creek Products API](https://apis.io/apis/duck-creek/duck-creek-products-api/) — Insurance product definitions and configuration
+- [duck-creek Quotes API](https://apis.io/apis/duck-creek/duck-creek-quotes-api/) — Policy quoting and rating
 
-Duck Creek Anywhere provides a RESTful API enabling non-Duck Creek systems to query product definitions, configurations, and content to drive processing within third-party systems. The platform exposes 2,600+ APIs across all Duck Creek applications using open standards. The Anywhere API Extension SDK allows developers to create custom REST API extensions to the Duck Creek Anywhere REST infrastructure.
+### Published properties
 
-- **Human URL:** [https://www.duckcreek.com/product/anywhere-integration/](https://www.duckcreek.com/product/anywhere-integration/)
-- **Base URL:** `https://api.duckcreek.com`
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-#### Tags
+#### GraphQL (1)
 
-- Billing
-- Claims
-- Insurance
-- Policy
-- REST
-- SaaS
+GraphQL schemas.
 
-#### Properties
+- [Moved to /providers/duck-creek/](https://apis.io/graphqls/duck-creek/duck-creek-graphql/)
 
-- [Documentation](https://www.duckcreek.com/product/anywhere-integration/)
-- [Portal](http://duckcreek.dev/)
-- [Reference](https://solutioncenter.duckcreek.com/)
-- [S D Ks](https://www.duckcreek.com/content-exchange/anywhere_api_extension_sdk/)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/duck-creek/refs/heads/main/openapi/duck-creek-policy-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/duck-creek-policy.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/duck-creek-policy.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Agentic access (1)
 
-### Duck Creek Policy Administration API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-Duck Creek Policy Administration API enables product configuration, premium calculation, policy lifecycle management, and policy issuance for P&C and specialty insurance carriers. Supports end-to-end policy management from quoting through renewal.
+- [Duck Creek Agentic Access](https://apis.io/agentic-access/duck-creek/duck-creek-agentic-access/)
 
-- **Human URL:** [https://www.duckcreek.com/product/policy-management-software/](https://www.duckcreek.com/product/policy-management-software/)
-- **Base URL:** `https://api.duckcreek.com`
+#### JSON Schema (24)
 
-#### Tags
+The data models the API reads and writes.
 
-- Insurance
-- P&C Insurance
-- Policy
-- Premium Calculation
-- Product Configuration
+- [Address](https://apis.io/schemas/duck-creek/duck-creek-address/)
+- [BillingAccount](https://apis.io/schemas/duck-creek/duck-creek-billingaccount/)
+- [BillingAccountList](https://apis.io/schemas/duck-creek/duck-creek-billingaccountlist/)
+- [CancellationRequest](https://apis.io/schemas/duck-creek/duck-creek-cancellationrequest/)
+- [Claim](https://apis.io/schemas/duck-creek/duck-creek-claim/)
+- [ClaimList](https://apis.io/schemas/duck-creek/duck-creek-claimlist/)
+- [ClaimRequest](https://apis.io/schemas/duck-creek/duck-creek-claimrequest/)
+- [ClaimSummary](https://apis.io/schemas/duck-creek/duck-creek-claimsummary/)
+- [Coverage](https://apis.io/schemas/duck-creek/duck-creek-coverage/)
+- [CoverageRequest](https://apis.io/schemas/duck-creek/duck-creek-coveragerequest/)
+- [Endorsement](https://apis.io/schemas/duck-creek/duck-creek-endorsement/)
+- [Error](https://apis.io/schemas/duck-creek/duck-creek-error/)
+- [Insured](https://apis.io/schemas/duck-creek/duck-creek-insured/)
+- [Invoice](https://apis.io/schemas/duck-creek/duck-creek-invoice/)
+- [InvoiceList](https://apis.io/schemas/duck-creek/duck-creek-invoicelist/)
+- [Duck Creek Insurance Policy](https://apis.io/schemas/duck-creek/duck-creek-policy/)
+- [PolicyList](https://apis.io/schemas/duck-creek/duck-creek-policylist/)
+- [PolicyRequest](https://apis.io/schemas/duck-creek/duck-creek-policyrequest/)
+- [PolicySummary](https://apis.io/schemas/duck-creek/duck-creek-policysummary/)
+- [PolicyUpdateRequest](https://apis.io/schemas/duck-creek/duck-creek-policyupdaterequest/)
+- [ProductList](https://apis.io/schemas/duck-creek/duck-creek-productlist/)
+- [ProductSummary](https://apis.io/schemas/duck-creek/duck-creek-productsummary/)
+- [Quote](https://apis.io/schemas/duck-creek/duck-creek-quote/)
+- [QuoteRequest](https://apis.io/schemas/duck-creek/duck-creek-quoterequest/)
 
-#### Properties
+#### JSON Structure (1)
 
-- [Documentation](https://www.duckcreek.com/product/policy-management-software/)
-- [Postman Collection](collections/duck-creek-policy.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/duck-creek-policy.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Data models expressed in JSON Structure.
 
-### Duck Creek Billing API
+- [Duck Creek Structure](https://apis.io/json-structure/duck-creek/duck-creek-structure/)
 
-Duck Creek Billing API provides billing operations for insurance carriers including invoice generation, payment processing, installment plans, and billing account management.
+#### JSON-LD (1)
 
-- **Human URL:** [https://www.duckcreek.com/product/duck-creek-platform/](https://www.duckcreek.com/product/duck-creek-platform/)
-- **Base URL:** `https://api.duckcreek.com`
+Linked-data contexts for the provider's vocabulary.
 
-#### Tags
+- [Duck Creek Context](https://apis.io/jsonld/duck-creek/duck-creek-context/)
 
-- Billing
-- Insurance
-- P&C Insurance
-- Payments
+#### Vocabulary (1)
 
-#### Properties
+The provider's domain terms, defined.
 
-- [Documentation](https://www.duckcreek.com/product/duck-creek-platform/)
-- [Postman Collection](collections/duck-creek-policy.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/duck-creek-policy.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Duck-Creek Domain Vocabulary](https://apis.io/vocabularies/duck-creek/duck-creek-vocabulary/)
 
-### Duck Creek Claims API
+#### Collections (6)
 
-Duck Creek Claims API supports claims intake, adjudication workflow, reserve management, and payment processing for P&C insurance carriers. Enables integration with third-party claims services and data providers.
+Postman and Open Collection request collections.
 
-- **Human URL:** [https://www.duckcreek.com/product/duck-creek-platform/](https://www.duckcreek.com/product/duck-creek-platform/)
-- **Base URL:** `https://api.duckcreek.com`
+- [Duck Creek Policy Administration Billing API](https://apis.io/collections/duck-creek/open-duck-creek-billing-api/)
+- [Duck Creek Policy Administration Billing Claims API](https://apis.io/collections/duck-creek/open-duck-creek-claims-api/)
+- [Duck Creek Policy Administration Billing Policies API](https://apis.io/collections/duck-creek/open-duck-creek-policies-api/)
+- [Duck Creek Policy Administration API](https://apis.io/collections/duck-creek/open-duck-creek-policy/)
+- [Duck Creek Policy Administration Billing Products API](https://apis.io/collections/duck-creek/open-duck-creek-products-api/)
+- [Duck Creek Policy Administration Billing Quotes API](https://apis.io/collections/duck-creek/open-duck-creek-quotes-api/)
 
-#### Tags
+#### Governance rules (1)
 
-- Claims
-- Claims Management
-- Insurance
-- P&C Insurance
+Spectral rulesets for the provider's contracts.
 
-#### Properties
+- [Duck Creek — jsonschema rules](https://apis.io/rules/duck-creek/duck-creek-jsonschema-spectral-rules/)
 
-- [Documentation](https://www.duckcreek.com/product/duck-creek-platform/)
-- [Postman Collection](collections/duck-creek-policy.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/duck-creek-policy.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Security (3)
 
-### Duck Creek Payments Orchestrator API
+Authentication, trust centre, and vulnerability disclosure.
 
-Duck Creek Payments Orchestrator API enables insurance carriers to orchestrate payment workflows including premium collection and claims disbursements. Provides reference documentation and how-to guides via the dedicated payments developer portal at developers.imbursepayments.com.
+- [Duck Creek Authentication](https://apis.io/security/duck-creek/duck-creek-authentication/)
+- [Duck Creek Domain Security](https://apis.io/security/duck-creek/duck-creek-domain-security/)
+- [Duck Creek Trust Center](https://apis.io/security/duck-creek/duck-creek-trust-center/)
 
-- **Human URL:** [https://developers.imbursepayments.com/](https://developers.imbursepayments.com/)
-- **Base URL:** `https://api.imbursepayments.com`
+#### OAuth scopes (1)
 
-#### Tags
+The permissions the API asks for.
 
-- Insurance
-- P&C Insurance
-- Payment Processing
-- Payments
+- [Duck Creek Scopes](https://apis.io/scopes/duck-creek/duck-creek-scopes/)
 
-#### Properties
+#### Plans and pricing (1)
 
-- [Documentation](https://developers.imbursepayments.com/)
-- [Portal](https://developers.imbursepayments.com/)
-- [Postman Collection](collections/duck-creek-policy.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/duck-creek-policy.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Published plans, tiers and prices.
 
-## Common Properties
+- [Duck Creek Plans Pricing](https://apis.io/plans/duck-creek/duck-creek-plans-pricing/)
 
-- [LinkedIn](https://www.linkedin.com/company/duck-creek-technologies)
+#### Rate limits (1)
+
+Published request limits.
+
+- [Duck Creek Rate Limits](https://apis.io/rate-limits/duck-creek/duck-creek-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Duck Creek Finops](https://apis.io/finops/duck-creek/duck-creek-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.duckcreek.com/)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/duck-creek/refs/heads/main/openapi/duck-creek-policy-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [JSON Schema](https://raw.githubusercontent.com/api-evangelist/duck-creek/refs/heads/main/json-schema/duck-creek-policy-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [J S O N L D Context](https://raw.githubusercontent.com/api-evangelist/duck-creek/refs/heads/main/json-ld/duck-creek-context.jsonld)
-- [Portal](http://duckcreek.dev/)
 - [Documentation](https://www.duckcreek.com/product/duck-creek-platform/)
-- [Getting Started](https://solutioncenter.duckcreek.com/)
-- [S D Ks](https://www.duckcreek.com/content-exchange/anywhere_api_extension_sdk/)
+- [Getting started](https://solutioncenter.duckcreek.com/)
 - [Support](https://www.duckcreek.com/customer-support/)
-- [Terms of Service](https://www.duckcreek.com/duck-creek-terms-use/)
-- [Privacy Policy](https://www.duckcreek.com/privacy-notice/)
 - [Blog](https://www.duckcreek.com/content-exchange/)
-- [Support](https://www.duckcreek.com/product/support/)
+- [Terms of service](https://www.duckcreek.com/duck-creek-terms-use/)
+- [Privacy policy](https://www.duckcreek.com/privacy-notice/)
 
-## Maintainers
+## API Evangelist rating
 
-**Email:** kin@apievangelist.com
+**Kin Score 43.8** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 57.1 |
+| Contract quality | 53.1 |
+| Contract governance | 9.8 |
+| Operational transparency | 5.3 |
+| Developer ergonomics | 65.5 |
+| Access clarity | 34.2 |
+
+**Agent readiness 24.1** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | negotiable (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 41.2** — Insurance
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/duck-creek/](https://apis.io/providers/duck-creek/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Duck Creek: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/duck-creek/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
